@@ -6,7 +6,6 @@ npm-debug.log*
 snapshot.zip
 
 
-dist/*
 assets/bower_components
 
 # add locales
