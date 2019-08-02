@@ -1,6 +1,7 @@
 {
   "name": "@nexys/utils",
   "version": "1.0.0",
+  "main": "dist/index.js",
   "dependencies": {
     "@babel/cli": "^7.5.5",
     "@babel/core": "^7.5.5",
