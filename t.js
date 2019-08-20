@@ -1,3 +1,3 @@
-const a = require('@nexys/utils')
+const a = require('./index')
 
 console.log(a)
