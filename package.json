@@ -7,7 +7,6 @@
     "@babel/core": "^7.5.5",
     "@babel/plugin-transform-runtime": "^7.5.5",
     "@babel/runtime": "^7.5.5",
-    "@nexys/utils": "^1.0.4",
     "babel-jest": "^24.8.0",
     "babel-loader": "^8.0.6",
     "babel-plugin-transform-runtime": "^6.23.0",
