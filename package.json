@@ -9,7 +9,7 @@
     "joi": "^14.3.1"
   },
   "scripts": {
-    "test": "jest ",
+    "test": "rimraf dist/ && jest ",
     "build": "rimraf dist/ && babel src/ --out-dir dist/"
   },
   "files": [
