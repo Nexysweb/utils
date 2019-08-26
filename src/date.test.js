@@ -54,6 +54,20 @@ test('findNumberOfDaysInMonth', () => {
   expect(n1).toEqual(n2);
 });
 
+test('findNumberOfDaysInMonth - dec', () => {
+  // note: it is the month INDEX
+  const n1 = findNumberOfDaysInMonth(12, 2018)
+  const n2 = 31;
+  expect(n1).toEqual(n2);
+});
+
+test('findNumberOfDaysInMonth - default year', () => {
+  // note: it is the month INDEX
+  const n1 = findNumberOfDaysInMonth(12)
+  const n2 = 31;
+  expect(n1).toEqual(n2);
+});
+
 test('countDaysDiffBtnDates', () => {
   const date1 = new Date('2019-03-04T23:00:00.000Z');
   const date2 = new Date('2019-06-04T22:00:00.000Z');

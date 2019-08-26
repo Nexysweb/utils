@@ -15,7 +15,7 @@ test('formatKprice', () => {
 test('sum', () => {
   // sum n = n(n+1)/2
   expect(sum([1, 2, 3, 4, 5, 6, 7, 8, 9])).toEqual(9*10/2);
-});
+}); 
 
 test('isNumeric', () => {
   expect(isNumeric(34)).toEqual(true);
