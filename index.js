@@ -2,7 +2,6 @@
 
 const date = require('./dist/date.js');
 const ds = require('./dist/ds.js');
-const index = require('./dist/index.js');
 const number = require('./dist/number.js');
 const random = require('./dist/random.js');
 const string = require('./dist/string.js');
@@ -10,7 +9,6 @@ const string = require('./dist/string.js');
 module.exports = {
   date,
   ds,
-  index,
   number,
   random,
   string
