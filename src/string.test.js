@@ -1,4 +1,4 @@
-import {readableFileSize, padding, contains, parseName, capitalize} from './string';
+import {readableFileSize, padding, contains, parseName, capitalize, paramsToString, parseEnvVar} from './string';
 
 test('padding', () => {
   const e = '00034';
@@ -23,4 +23,16 @@ test('capitalize', () => {
 
 test('readableFileSize', () => {
   expect(readableFileSize(568749)).toEqual('555.42 KB');
+});
+
+test('paramsToString', () => {
+  const params = {a: 'fd', b: 23};
+  const e = 'a=fd&b=23';
+  expect(paramsToString(params)).toEqual(e); 
+});
+
+test('parseEnvVar', () => {
+  const value = 'fd="gfds"';
+  const e = 'fd="gfds"';
+  expect(parseEnvVar(value)).toEqual(e); 
 });

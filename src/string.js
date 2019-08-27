@@ -52,4 +52,29 @@ const capitalize = s => {
   return h + t;
 };
 
+export const paramsToString = params => Object.keys(params).map(key => key + '=' + encodeURIComponent(params[key])).join('&');
+
+export const parseEnvVar = (value='') => {
+  const end = value.length - 1;
+  const isDoubleQuoted = value[0] === '"' && value[end] === '"';
+  const isSingleQuoted = value[0] === "'" && value[end] === "'";
+
+  // if single or double quoted, remove quotes
+  if (isSingleQuoted || isDoubleQuoted) {
+    value = value.substring(1, end);
+
+    // if double quoted, expand newlines
+    if (isDoubleQuoted) {
+      const RE_NEWLINES = /\\n/g;
+      const NEWLINE = '\n';
+      value = value.replace(RE_NEWLINES, NEWLINE);
+    }
+  } else {
+    // remove surrounding whitespace
+    value = value.trim();
+  }
+
+  return value;
+};
+
 export {readableFileSize, padding, contains, parseName, capitalize};

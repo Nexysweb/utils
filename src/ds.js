@@ -29,3 +29,43 @@ export const transpose = (arr, fn = a => a) => {
   return r;
 }
 
+export const groupBy = (arr, key) => {
+  const callback = (acc, v) => {
+    // dummy variable that is the value of the key
+    const k = get(key, v);
+
+    (acc[k] = acc[k] || []).push(v);
+    return acc;
+  }
+
+  return arr.reduce(callback, {});
+};
+
+export const unique = function(arr, prop) {
+  const temp = arr.map(obj => {
+    return prop ? get(prop, obj) : obj 
+  });
+
+  return arr.filter(function(obj, i) { return temp.indexOf(prop ? get(prop, obj) : obj) == i; });
+}
+
+/**
+ * @param k1=v1,k2=v2, ...
+ * @return { k1: v1, k2: v2 .. }
+ */
+export const deserialize = str => str.split(',').reduce((r, item) => {
+  const arr = item.split('=');
+
+  if (arr.length === 2) {
+    const [ key, value] = arr;
+
+    return  {...r, [key]: value};
+  } else return r;
+}, {});
+
+export const get = function(p, o) { 
+  return p.split(".").reduce(function(xs, x) {
+    if (xs && xs[x]) return xs[x];
+    else return null;
+  }, o);
+};

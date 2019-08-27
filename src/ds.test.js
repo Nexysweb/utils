@@ -1,4 +1,4 @@
-import { distinct, transpose } from './ds';
+import { distinct, transpose, groupBy, unique, get, deserialize } from './ds';
 
 
 test('transpose', () => {
@@ -30,4 +30,52 @@ test('distinct with objects', () => {
   expect(r).toEqual(e);
 });
 */
+
+test('group by', () => {
+  const value = [
+    {a: 'first', v: 4},
+    {a: 'first', v: 2},
+    {a: 'second', v: 1},
+    {a: 'second', v: 5}
+  ];
+
+  const e = {
+    'first': [
+      {a: 'first', v: 4},
+      {a: 'first', v: 2}
+    ],
+    'second': [
+      {a: 'second', v: 1},
+      {a: 'second', v: 5}
+    ]
+  };
+
+  expect(groupBy(value, 'a')).toEqual(e); 
+});
+
+test('deserialize', () => {
+  const value = 'k1=v1,k2=v2';
+  const e = { 'k2': 'v2', 'k1': 'v1'};
+  expect(deserialize(value)).toEqual(e); 
+});
+
+test('unique', () => {
+  const rows = [
+    {ModuleId: 3},
+    {ModuleId: 1},
+    {ModuleId: 2},
+    {ModuleId: 3}
+  ];
+
+  const r = unique(rows.map(e => e.ModuleId))
+
+  expect(r).toEqual([3, 1, 2]);
+});
+
+test('get', () => {
+  const p = "country.id";
+  const data = {country: {id: 4}};
+
+  expect(get(p, data)).toEqual(4)
+});
 
