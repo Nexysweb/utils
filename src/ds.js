@@ -29,16 +29,17 @@ export const transpose = (arr, fn = a => a) => {
   return r;
 }
 
+/**
+ * Groups array of objects by attributre
+ * @param arr - the source array
+ * @param key - the attribute to group by
+ * @return array of groups
+ */
 export const groupBy = (arr, key) => {
-  const callback = (acc, v) => {
-    // dummy variable that is the value of the key
-    const k = get(key, v);
-
-    (acc[k] = acc[k] || []).push(v);
-    return acc;
-  }
-
-  return arr.reduce(callback, {});
+  return arr.reduce((rv, x) => {
+    (rv[x[key]] = rv[x[key]] || []).push(x);
+    return rv;
+  }, {});
 };
 
 export const unique = function(arr, prop) {
