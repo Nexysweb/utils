@@ -1,4 +1,4 @@
-import {readableFileSize, padding, contains, parseName, capitalize, paramsToString, parseEnvVar} from './string';
+import {readableFileSize, padding, contains, parseName, capitalize, removeWhitespace, paramsToString, parseEnvVar} from './string';
 
 test('padding', () => {
   const e = '00034';
@@ -24,6 +24,13 @@ test('capitalize', () => {
 test('readableFileSize', () => {
   expect(readableFileSize(568749)).toEqual('555.42 KB');
 });
+
+
+test('removeWhitespace', () => {
+  const value = 'first and second';
+  const vw = 'firstandsecond';
+  expect(removeWhitespace(value)).toEqual(vw);
+})
 
 test('paramsToString', () => {
   const params = {a: 'fd', b: 23};

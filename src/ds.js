@@ -70,3 +70,15 @@ export const get = function(p, o) {
     else return null;
   }, o);
 };
+
+export const removeProp = (obj, prop) => {
+  return Object.keys(obj)
+    .reduce((acc, key) => key !== prop ? ({...acc, [key]: obj[key]}) : acc, {});
+}
+
+export const removeProps = (obj, props) => {
+  while (props.length > 0) {
+    obj = removeProp(obj, props.pop());
+  }
+  return obj;
+}

@@ -52,6 +52,18 @@ const capitalize = s => {
   return h + t;
 };
 
+/**
+ * remove whitespaces from a string
+ * @param  value
+ * @return value without whitespaces
+ */
+export const removeWhitespace = value => {
+  // TODO: is not object literal
+  if (value && isNaN(value)) return value.replace(/\s/g, "");
+  else return value;
+}
+
+
 export const paramsToString = params => Object.keys(params).map(key => key + '=' + encodeURIComponent(params[key])).join('&');
 
 export const parseEnvVar = (value='') => {
