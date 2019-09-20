@@ -82,3 +82,35 @@ export const removeProps = (obj, props) => {
   }
   return obj;
 }
+
+/**
+ * helper function when updating a form that assign incoming obj {name, value} to existing form object {}
+ * @param  form: form as object
+ * @param  newObj: new field that was updated
+ * @return updated form
+ */
+export const updateObject = (form, newObj) => {
+  // update state with new values
+  const value = newObj.value;
+  const keyArray = newObj.name.split('.');
+
+  // depth of the value
+  const l = keyArray.length;
+  // dummy
+  let f = form;
+
+  keyArray.map((k, i) => {
+    if (i === l - 1) {
+      f[k] = value;
+
+    } else {
+      if (!f[k]) {
+        f[k] = {};
+      }
+    }
+
+    f = f[k];
+  })
+
+  return form;
+};

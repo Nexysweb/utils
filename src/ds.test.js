@@ -1,4 +1,4 @@
-import { distinct, transpose, groupBy, unique, get, deserialize, removeProp, removeProps } from './ds';
+import { distinct, transpose, groupBy, unique, get, deserialize, removeProp, removeProps, updateObject } from './ds';
 
 test('transpose', () => {
   const a = {a: {c: 'my ac', d: 'my ad'}, b: {c: 'my bc', d: 'my bd'}};
@@ -89,5 +89,33 @@ test('remove prop', () => {
   const obj = {a: 'sdf', b: 'sd'};
 
   expect(removeProps(obj, ['a', 'b'])).toEqual({})
+});
+
+test('updateObject', () => {
+  const form = {};
+  const newObj = {name: 'myname', value: 'myvalue'};
+
+  expect(updateObject(form, newObj)).toEqual({myname: 'myvalue'});
+});
+
+test('updateObject, 2d', () => {
+  const form = {};
+  const newObj = {name: 'myname.first', value: 'myvalue'};
+
+  expect(updateObject(form, newObj)).toEqual({myname: {first : 'myvalue'}});
+});
+
+test('updateObject, 3d', () => {
+  const form = {};
+  const newObj = {name: 'myname.first.foo', value: 'myvalue'};
+
+  expect(updateObject(form, newObj)).toEqual({myname: {first: {foo : 'myvalue'}}});
+});
+
+test('updateObject, 2d, with already existing', () => {
+  const form = {myname: {second: 'mysecond'}};
+  const newObj = {name: 'myname.first', value: 'myvalue'};
+
+  expect(updateObject(form, newObj)).toEqual({myname: {first:  'myvalue', second: 'mysecond'}});
 });
 
