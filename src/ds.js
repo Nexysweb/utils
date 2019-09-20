@@ -64,12 +64,7 @@ export const deserialize = str => str.split(',').reduce((r, item) => {
   } else return r;
 }, {});
 
-export const get = function(p, o) { 
-  return p.split(".").reduce(function(xs, x) {
-    if (xs && xs[x]) return xs[x];
-    else return null;
-  }, o);
-};
+
 
 export const removeProp = (obj, prop) => {
   return Object.keys(obj)
@@ -84,20 +79,33 @@ export const removeProps = (obj, props) => {
 }
 
 /**
- * helper function when updating a form that assign incoming obj {name, value} to existing form object {}
- * @param  form: form as object
- * @param  newObj: new field that was updated
- * @return updated form
+ * get attribute value (even if nested)
+ * @param  p : attribute name
+ * @param  o : object
+ * @return o[p] respectively o[p1][p2]...
  */
-export const updateObject = (form, newObj) => {
+export const get = function(p, o) { 
+  return p.split(".").reduce(function(xs, x) {
+    if (xs && xs[x]) return xs[x];
+    else return null;
+  }, o);
+};
+
+/**
+ * set attribute value (even if nested)
+ * @param  name : attribute name
+ * @param  value : attribute value
+ * @param  obj : object
+ * @return o[p] respectively o[p1][p2]...
+ */
+export const set = (name, value, obj) => {
   // update state with new values
-  const value = newObj.value;
-  const keyArray = newObj.name.split('.');
+  const keyArray = name.split('.');
 
   // depth of the value
   const l = keyArray.length;
   // dummy
-  let f = form;
+  let f = obj;
 
   keyArray.map((k, i) => {
     if (i === l - 1) {
@@ -110,7 +118,15 @@ export const updateObject = (form, newObj) => {
     }
 
     f = f[k];
-  })
+  });
 
-  return form;
+  return obj;
 };
+
+/**
+ * helper function when updating a form that assign incoming obj {name, value} to existing form object {}
+ * @param  form: form as object
+ * @param  newObj: new field that was updated
+ * @return updated form
+ */
+export const updateObject = (form, newObj) => set(newObj.name, newObj.value, form);

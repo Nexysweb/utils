@@ -1,4 +1,4 @@
-import { distinct, transpose, groupBy, unique, get, deserialize, removeProp, removeProps, updateObject } from './ds';
+import { distinct, transpose, groupBy, unique, get, set, deserialize, removeProp, removeProps, updateObject } from './ds';
 
 test('transpose', () => {
   const a = {a: {c: 'my ac', d: 'my ad'}, b: {c: 'my bc', d: 'my bd'}};
@@ -89,6 +89,22 @@ test('remove prop', () => {
   const obj = {a: 'sdf', b: 'sd'};
 
   expect(removeProps(obj, ['a', 'b'])).toEqual({})
+});
+
+test('get', () => {
+  const p = "country.id";
+  const data = {country: {id: 4}};
+
+  expect(get(p, data)).toEqual(4)
+});
+
+test('set', () => {
+  const p = "country.id";
+  const value = 4;
+  const data = {city: 'Paris'};
+  const data2 = {city: 'Paris', country: {id: 4}};
+
+  expect(set(p, value, data)).toEqual(data2)
 });
 
 test('updateObject', () => {
