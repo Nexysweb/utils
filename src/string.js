@@ -89,4 +89,40 @@ export const parseEnvVar = (value='') => {
   return value;
 };
 
-export {readableFileSize, padding, contains, parseName, capitalize};
+/**
+ * format a phone number
+ * @param input clean number, e.g. 0041765545412
+ * @return formatted: e.g. +41 76 554 54 12
+ */
+const formatPhone = p => {
+  // get US prefix
+  const usPrefix = p.substring(0, 3)
+  const intlPrefix = p.substring(0, 2);
+
+  // look for US number
+  if (usPrefix === '001' && p.length === 13) {
+    return '+1 (' + p.substr(3,3) + ') ' + p.substr(6, 3) + '-' + p.substr(9, 4);
+  }
+
+  // look for international number (non US)
+  if (intlPrefix === '00' && p.length === 13) {
+    return '+' + p.substr(2, 2) + ' ' + p.substr(4, 2) + ' ' + p.substr(6, 3) + ' ' + p.substr(9, 2)  + ' ' + p.substr(11, 2);
+  }
+
+  if (intlPrefix === '00' && p.length === 14) {
+    return '+' + p.substr(2, 2) + ' ' + p.substr(4, 4) + ' ' + p.substr(8, 6);
+  }
+
+  if (intlPrefix != '00' && p.length === 10) {
+    return p.substr(0, 3) + ' ' + p.substr(3, 3) + ' ' + p.substr(6, 2)  + ' ' + p.substr(8, 2);
+  }
+
+  if (intlPrefix != '00' && p.length === 11) {
+    return p.substr(0, 4) + ' ' + p.substr(4, 3) + ' ' + p.substr(5, 2)  + ' ' + p.substr(9, 2);
+  }
+
+  // if it does not match anything simply return input
+  return p;
+}
+
+export {readableFileSize, padding, contains, parseName, capitalize, formatPhone};

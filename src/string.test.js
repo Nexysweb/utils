@@ -1,4 +1,4 @@
-import {readableFileSize, padding, contains, parseName, capitalize, removeWhitespace, paramsToString, parseEnvVar} from './string';
+import {readableFileSize, padding, contains, parseName, capitalize, removeWhitespace, paramsToString, parseEnvVar, formatPhone } from './string';
 
 test('padding', () => {
   const e = '00034';
@@ -43,3 +43,9 @@ test('parseEnvVar', () => {
   const e = 'fd="gfds"';
   expect(parseEnvVar(value)).toEqual(e); 
 });
+
+test('format phone', () => {
+  const phone = '+4179333211';
+  const e = '+417 933 33 11';
+  expect(formatPhone(phone)).toEqual(e)
+})
