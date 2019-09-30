@@ -1,4 +1,4 @@
-import { distinct, transpose, groupBy, unique, get, set, deserialize, removeProp, removeProps, updateObject } from './ds';
+import { distinct, transpose, groupBy, unique, get, set, deserialize, removeProp, removeProps, updateObject, isEmpty, removePrefix, removeWhitespace } from './ds';
 
 test('transpose', () => {
   const a = {a: {c: 'my ac', d: 'my ad'}, b: {c: 'my bc', d: 'my bd'}};
@@ -135,3 +135,17 @@ test('updateObject, 2d, with already existing', () => {
   expect(updateObject(form, newObj)).toEqual({myname: {first:  'myvalue', second: 'mysecond'}});
 });
 
+test('isempty', () => {
+  const b = {a: 'sdf'};
+
+  expect(isEmpty(b)).toEqual(false);
+  expect(isEmpty({})).toEqual(true);
+  expect(isEmpty(undefined)).toEqual(true);
+});
+
+test('remove prefix', () => {
+  const a = {'prefix-a': 'sdf', 'prefix-b': 'qwe'};
+  const b = {'a': 'sdf', 'b': 'qwe'};
+
+  expect(removePrefix(a, 'prefix-')).toEqual(b);
+});

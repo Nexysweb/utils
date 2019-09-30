@@ -1,3 +1,5 @@
+import { removeWhitespace } from './string';
+
 /**
  * @see https://codeburst.io/javascript-array-distinct-5edc93501dc4
  * @return only distinct entries in an array 
@@ -130,3 +132,87 @@ export const set = (name, value, obj) => {
  * @return updated form
  */
 export const updateObject = (form, newObj) => set(newObj.name, newObj.value, form);
+
+/**
+ * checks if object is empty
+ * @param  {[type]} obj [description]
+ * @return {[type]}     [description]
+ */
+export const isEmpty = obj => {
+  if (!obj) return true;
+  for (let key in obj) if(obj.hasOwnProperty(key)) return false;
+  return true;
+}
+
+/**
+ * removes prefix for all keys
+ */
+export const removePrefix = (obj, prefix) => {
+  if (obj.data) return obj.data;
+  return Object.keys(obj).reduce((a, key) => ({...a, [key.replace(prefix, "")]: obj[key] }), {});
+}
+
+
+/**
+   * sort array of objects by attribute
+   * @async see http://stackoverflow.com/questions/1129216/sort-array-of-objects-by-string-property-value-in-javascript
+   * @param array: array to sort
+   * @param attr: attribute to sort with
+   * @param asc: if true - sort ascending, false - descending
+   * @return sorted array by attribute
+   */
+export const sortByProp = (arr, attr, asc) => {
+  if (!arr) return null;
+
+  // by default aattribute is name
+  if (typeof attr === 'undefined') {
+    attr = 'name';
+  }
+  if (typeof asc === 'undefined') {
+    asc = true;
+  }
+
+  const lower = value => {
+    if (typeof value === 'number') return value;
+    else return value && value.length > 0 ? value.toLowerCase() : '';
+  }
+
+  const compare = (a, b) => {
+    let attrA = lower(removeWhitespace(this.get(attr, a)));
+    let attrB = lower(removeWhitespace(this.get(attr, b)));
+    let comparison = 0;
+    if (attrA > attrB) comparison=1; else comparison=-1;
+    return asc ? comparison : comparison*-1;
+  };
+
+  return arr.sort(compare);
+};
+
+/**
+ * compares two objects by prop
+ * @param a: obj 1
+ * @param b: obj 2
+ * @param attr: object property that is used for comparison
+ * @return {1, 0, -1}
+*/
+export const compareObj = (a, b, attr, date=false) => {
+  let valueA = this.get(attr, a);
+  let valueB = this.get(attr, b);
+
+  if (!valueA || !valueB) {
+    return 0;
+  }
+
+  if (date) return moment(a.publishedAt).unix() - moment(b.publishedAt).unix();
+
+  if (typeof valueA === 'string') {
+    valueA = valueA.toLowerCase();
+  }
+  if (typeof valueB === 'string') {
+    valueB = valueB.toLowerCase();
+  }
+
+  return valueA.localeCompare(valueB);
+};
+
+

@@ -6,6 +6,7 @@ const ds = require('./dist/ds.js');
 const number = require('./dist/number.js');
 const random = require('./dist/random.js');
 const string = require('./dist/string.js');
+const url = require('./dist/url.js');
 
 module.exports = {
   array,
@@ -13,5 +14,6 @@ module.exports = {
   ds,
   number,
   random,
-  string
+  string,
+  url
 };

@@ -30,6 +30,11 @@ test('removeWhitespace', () => {
   const value = 'first and second';
   const vw = 'firstandsecond';
   expect(removeWhitespace(value)).toEqual(vw);
+
+  const a = 'sd sdf gf  r';
+  const b = 'sdsdfgfr';
+
+  expect(removeWhitespace(a)).toEqual(b);
 })
 
 test('paramsToString', () => {
@@ -48,4 +53,5 @@ test('format phone', () => {
   const phone = '+4179333211';
   const e = '+417 933 33 11';
   expect(formatPhone(phone)).toEqual(e)
-})
+});
+
