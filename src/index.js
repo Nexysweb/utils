@@ -1,12 +1,12 @@
-import array from './array.js';
-import date from './date.js';
-import ds from './ds.js';
-import number from './number.js';
-import random from './random.js';
-import string from './string.js';
-import url from './url.js';
+import * as array from './array.js';
+import * as date from './date.js';
+import * as ds from './ds.js';
+import * as number from './number.js';
+import * as random from './random.js';
+import * as string from './string.js';
+import * as url from './url.js';
 
-export default {
+export {
   array,
   date,
   ds,
@@ -15,3 +15,8 @@ export default {
   string,
   url
 };
+
+//export { default as array } from './array.js';
+
+//export { default as Components } from './components';
+//export { default as Form } from './components/form';
