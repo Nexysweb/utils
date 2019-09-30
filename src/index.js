@@ -6,7 +6,7 @@ import random from './random.js';
 import string from './string.js';
 import url from './url.js';
 
-export {
+export default {
   array,
   date,
   ds,
