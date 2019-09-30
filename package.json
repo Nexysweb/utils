@@ -1,7 +1,7 @@
 {
   "name": "@nexys/utils",
   "version": "1.3.7",
-  "main": "index.js",
+  "main": "dist/index.js",
   "dependencies": {
     "@babel/runtime": "^7.5.5"
   },

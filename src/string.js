@@ -125,4 +125,4 @@ const formatPhone = p => {
   return p;
 }
 
-export {readableFileSize, padding, contains, parseName, capitalize, formatPhone};
+export { readableFileSize, padding, contains, parseName, capitalize, formatPhone };
