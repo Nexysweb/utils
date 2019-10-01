@@ -64,7 +64,10 @@ export const removeWhitespace = value => {
 }
 
 
-export const paramsToString = params => Object.keys(params).map(key => key + '=' + encodeURIComponent(params[key])).join('&');
+export const paramsToString = params => {
+  console.error('this function is deprecated, use the one in "urls"')
+  Object.keys(params).map(key => key + '=' + encodeURIComponent(params[key])).join('&');
+}
 
 export const parseEnvVar = (value='') => {
   const end = value.length - 1;
