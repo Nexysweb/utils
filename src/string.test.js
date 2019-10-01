@@ -1,4 +1,4 @@
-import {readableFileSize, padding, contains, parseName, capitalize, removeWhitespace, paramsToString, parseEnvVar, formatPhone } from './string';
+import {readableFileSize, padding, contains, parseName, capitalize, removeWhitespace, parseEnvVar, formatPhone } from './string';
 
 test('padding', () => {
   const e = '00034';
@@ -35,12 +35,6 @@ test('removeWhitespace', () => {
   const b = 'sdsdfgfr';
 
   expect(removeWhitespace(a)).toEqual(b);
-})
-
-test('paramsToString', () => {
-  const params = {a: 'fd', b: 23};
-  const e = 'a=fd&b=23';
-  expect(paramsToString(params)).toEqual(e); 
 });
 
 test('parseEnvVar', () => {

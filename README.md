@@ -6,3 +6,7 @@ const a = require('@nexys/utils')
 
 console.log(a)
 ```
+
+## Documentation
+
+use https://github.com/jsdoc/jsdoc?
