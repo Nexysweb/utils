@@ -6,6 +6,16 @@ import * as random from './random.js';
 import * as string from './string.js';
 import * as url from './url.js';
 
+const d = {
+  array,
+  date,
+  ds,
+  number,
+  random,
+  string,
+  url
+};
+
 export {
   array,
   date,
@@ -16,7 +26,4 @@ export {
   url
 };
 
-//export { default as array } from './array.js';
-
-//export { default as Components } from './components';
-//export { default as Form } from './components/form';
+export default d;
