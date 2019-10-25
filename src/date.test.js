@@ -8,7 +8,7 @@ test('add days', () => {
 
 test('add months', () => {
   const date1 = new Date('2019-03-04T23:00:00.000Z');
-  const date2 = new Date('2019-06-04T22:00:00.000Z');
+  const date2 = new Date('2019-06-04T23:00:00.000Z');
   expect(addMonths(date1, 3)).toEqual(date2)
 });
 
