@@ -3,7 +3,7 @@
  * @param size: file size in bytes
  * @return file size in readable format
  */
-const readableFileSize = size => {
+export const readableFileSize = size => {
   const i = Math.floor(Math.log(size) / Math.log(1024));
   return Number((size / Math.pow(1024, i)).toFixed(2)) + ' ' + ['B', 'KB', 'MB', 'GB', 'TB'][i];
 };
@@ -15,7 +15,7 @@ const readableFileSize = size => {
  * @param z: padding character (default: 0)
  * @return padded string
  */
-const padding = (m, width, z) => {
+export const padding = (m, width, z) => {
   z = z || '0';
   const n = String(m);
   return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
@@ -27,7 +27,7 @@ const padding = (m, width, z) => {
  * @param b: string to search
  * @return true/false
  */
-const contains = (a, b) => {
+export const contains = (a, b) => {
   return (a.toLowerCase().indexOf(b.toLowerCase()) > -1);
 };
 
@@ -36,7 +36,7 @@ const contains = (a, b) => {
 * @param name: name to parse
 * @return obj with i = index, key = name
 */
-const parseName = name => {
+export const parseName = name => {
   return {i: name.substr(1, 1), key: name.substr(4, name.length - 1)};
 };
 
@@ -44,7 +44,7 @@ const parseName = name => {
  * formats string so that first letter is upper case and rest lower case
  * @param s string to capitalize
  */
-const capitalize = s => {
+export const capitalize = s => {
   // 1. upper case first char
   var h = s.charAt(0).toUpperCase();
   // 2. get tail of string
@@ -91,7 +91,7 @@ export const parseEnvVar = (value='') => {
  * @param input clean number, e.g. 0041765545412
  * @return formatted: e.g. +41 76 554 54 12
  */
-const formatPhone = p => {
+export const formatPhone = p => {
   // get US prefix
   const usPrefix = p.substring(0, 3)
   const intlPrefix = p.substring(0, 2);
@@ -122,4 +122,21 @@ const formatPhone = p => {
   return p;
 }
 
-export { readableFileSize, padding, contains, parseName, capitalize, formatPhone };
+/**
+ * checks if input string is an email
+ * @param   email
+ * @return true/false
+ * @see  https://stackoverflow.com/questions/13912597/validate-email-one-liner-in-scala/32445372#32445372
+ * @see  http://www.w3.org/TR/html5/forms.html#valid-e-mail-address
+ */
+export const isEmail = email => {
+  const emailRegex = /^[a-zA-Z0-9\.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/i
+
+  const regexResult = email.match(emailRegex);
+
+  if (!regexResult) {
+    return false;
+  }
+
+  return regexResult.includes(email);
+}
