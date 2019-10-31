@@ -63,15 +63,15 @@ export const deserialize = str => str.split(',').reduce((r, item) => {
     const [ key, value] = arr;
 
     return  {...r, [key]: value};
-  } else return r;
+  }
+
+  return r;
 }, {});
-
-
 
 export const removeProp = (obj, prop) => {
   return Object.keys(obj)
     .reduce((acc, key) => key !== prop ? ({...acc, [key]: obj[key]}) : acc, {});
-}
+};
 
 export const removeProps = (obj, props) => {
   while (props.length > 0) {
@@ -152,6 +152,16 @@ export const removePrefix = (obj, prefix) => {
   return Object.keys(obj).reduce((a, key) => ({...a, [key.replace(prefix, "")]: obj[key] }), {});
 }
 
+// needed for sort by prop
+export const lower = value => {
+  if (typeof value === 'number') return value;
+  
+  if(value && value.length > 0) {
+    return value.toLowerCase();
+  }
+
+  return '';
+}
 
 /**
    * sort array of objects by attribute
@@ -161,21 +171,8 @@ export const removePrefix = (obj, prefix) => {
    * @param asc: if true - sort ascending, false - descending
    * @return sorted array by attribute
    */
-export const sortByProp = (arr, attr, asc = false) => {
+export const sortByProp = (arr, attr = 'name', asc = true) => {
   if (!arr) return null;
-
-  // by default attribute is name
-  if (typeof attr === 'undefined') {
-    attr = 'name';
-  }
-  if (typeof asc === 'undefined') {
-    asc = true;
-  }
-
-  const lower = value => {
-    if (typeof value === 'number') return value;
-    else return value && value.length > 0 ? value.toLowerCase() : '';
-  }
 
   const compare = (a, b) => {
     let attrA = lower(removeWhitespace(get(attr, a)));
@@ -195,15 +192,13 @@ export const sortByProp = (arr, attr, asc = false) => {
  * @param attr: object property that is used for comparison
  * @return {1, 0, -1}
 */
-export const compareObj = (a, b, attr, date=false) => {
-  let valueA = this.get(attr, a);
-  let valueB = this.get(attr, b);
+export const compareObj = (a, b, attr) => {
+  let valueA = get(attr, a);
+  let valueB = get(attr, b);
 
   if (!valueA || !valueB) {
     return 0;
   }
-
-  if (date) return moment(a.publishedAt).unix() - moment(b.publishedAt).unix();
 
   if (typeof valueA === 'string') {
     valueA = valueA.toLowerCase();

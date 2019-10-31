@@ -1,4 +1,4 @@
-import { distinct, transpose, groupBy, unique, get, set, deserialize, removeProp, removeProps, updateObject, isEmpty, removePrefix, removeWhitespace, sortByProp } from './ds';
+import { distinct, transpose, groupBy, unique, get, set, deserialize, removeProp, removeProps, updateObject, isEmpty, removePrefix, removeWhitespace, sortByProp, compareObj, lower } from './ds';
 
 test('transpose', () => {
   const a = {a: {c: 'my ac', d: 'my ad'}, b: {c: 'my bc', d: 'my bd'}};
@@ -58,6 +58,11 @@ test('deserialize', () => {
   expect(deserialize(value)).toEqual(e); 
 });
 
+test('deserialize (2)', () => {
+  const value = 'k1v1';
+  expect(deserialize(value)).toEqual({}); 
+})
+
 test('unique', () => {
   const rows = [
     {ModuleId: 3},
@@ -76,6 +81,13 @@ test('get', () => {
   const data = {country: {id: 4}};
 
   expect(get(p, data)).toEqual(4)
+});
+
+test('get - return null', () => {
+  const p = "country.id";
+  const data = {country: 'France'};
+
+  expect(get(p, data)).toEqual(null)
 });
 
 test('remove prop', () => {
@@ -150,6 +162,12 @@ test('remove prefix', () => {
   expect(removePrefix(a, 'prefix-')).toEqual(b);
 });
 
+test('lower', () => {
+  expect(lower(2)).toEqual(2);
+  expect(lower('Jkl')).toEqual('jkl');
+  expect(lower('')).toEqual('');
+})
+
 test('sort by prop (1)', () => {
   const arr = [{name: 'Switzerland'}, {name: 'Germany'}];
   const asc = true;
@@ -169,3 +187,35 @@ test('sort by prop (2)', () => {
 
   expect(s).toEqual(e);
 });
+
+
+test('compare object - return 0', () => {
+  const a = {name: 'Germany', misc: 'misc1'};
+  const b = {name: 'Germany', misc: 'misc1'};
+  const attr = 'name';
+
+  const r = compareObj(a, b, attr);
+
+  expect(r).toEqual(0);
+});
+
+test('compare object - return 0', () => {
+  const a = {name: 'France', misc: 'misc1'};
+  const b = {name: 'Germany', misc: 'misc1'};
+  const attr = 'name';
+
+  const r1 = compareObj(a, b, attr);
+  expect(r1).toEqual(-1);
+  const r2 = compareObj(b, a, attr);
+  expect(r2).toEqual(1);
+});
+
+test('compare object - missing input', () => {
+  const a = {name: 'France', misc: 'misc1'};
+  const b = { misc: 'misc1'};
+  const attr = 'name';
+
+  const r1 = compareObj(a, b, attr);
+  expect(r1).toEqual(0);
+});
+
