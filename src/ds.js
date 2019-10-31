@@ -161,10 +161,10 @@ export const removePrefix = (obj, prefix) => {
    * @param asc: if true - sort ascending, false - descending
    * @return sorted array by attribute
    */
-export const sortByProp = (arr, attr, asc) => {
+export const sortByProp = (arr, attr, asc = false) => {
   if (!arr) return null;
 
-  // by default aattribute is name
+  // by default attribute is name
   if (typeof attr === 'undefined') {
     attr = 'name';
   }
@@ -178,8 +178,8 @@ export const sortByProp = (arr, attr, asc) => {
   }
 
   const compare = (a, b) => {
-    let attrA = lower(removeWhitespace(this.get(attr, a)));
-    let attrB = lower(removeWhitespace(this.get(attr, b)));
+    let attrA = lower(removeWhitespace(get(attr, a)));
+    let attrB = lower(removeWhitespace(get(attr, b)));
     let comparison = 0;
     if (attrA > attrB) comparison=1; else comparison=-1;
     return asc ? comparison : comparison*-1;

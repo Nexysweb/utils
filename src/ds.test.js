@@ -1,4 +1,4 @@
-import { distinct, transpose, groupBy, unique, get, set, deserialize, removeProp, removeProps, updateObject, isEmpty, removePrefix, removeWhitespace } from './ds';
+import { distinct, transpose, groupBy, unique, get, set, deserialize, removeProp, removeProps, updateObject, isEmpty, removePrefix, removeWhitespace, sortByProp } from './ds';
 
 test('transpose', () => {
   const a = {a: {c: 'my ac', d: 'my ad'}, b: {c: 'my bc', d: 'my bd'}};
@@ -148,4 +148,24 @@ test('remove prefix', () => {
   const b = {'a': 'sdf', 'b': 'qwe'};
 
   expect(removePrefix(a, 'prefix-')).toEqual(b);
+});
+
+test('sort by prop (1)', () => {
+  const arr = [{name: 'Switzerland'}, {name: 'Germany'}];
+  const asc = true;
+  const attr = 'name';
+  const s = sortByProp(arr, attr, asc);
+  const e = [{name: 'Germany'}, {name: 'Switzerland'}];
+
+  expect(s).toEqual(e);
+});
+
+test('sort by prop (2)', () => {
+  const arr = [{name: 'France'}, {name: 'Switzerland'}, {name: 'Germany'}];
+  const asc = false;
+  const attr = 'name';
+  const s = sortByProp(arr, attr, asc);
+  const e = [{name: 'Switzerland'}, {name: 'Germany'}, {name: 'France'}];
+
+  expect(s).toEqual(e);
 });
