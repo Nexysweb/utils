@@ -104,7 +104,7 @@ export const createArrayOfLength = (n, idx = 1) => Array.from({length: n}, (v, k
 export const flattenArray = arr => [].concat.apply([], arr);
 
 // start comparison helper
-const compareArrayEntriesDepth = (a, b, attr) => {
+export const compareArrayEntriesDepth = (a, b, attr) => {
   const s = attr.split('.');
 
   let ca = a[attr];
@@ -128,9 +128,9 @@ const compareArrayEntriesDepth = (a, b, attr) => {
   return compareArrayEntries(ca, cb);
 };
 
-const compareArrayEntriesWAttr = (a, b, attr) => compareArrayEntries(a[attr], b[attr]);
+export const compareArrayEntriesWAttr = (a, b, attr) => compareArrayEntries(a[attr], b[attr]);
 
-const compareArrayEntries = (a, b) => {
+export const compareArrayEntries = (a, b) => {
   if (a < b) {
     return -1;
   }
@@ -177,8 +177,6 @@ export const isValueInArray = (array, value, attr = 'id') => {
   
   return array.find(a => a[attr] === value);
 };
-
-
 
 /**
  * find value in an array

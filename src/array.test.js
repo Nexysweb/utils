@@ -1,5 +1,7 @@
 import {arrayBooleanToInt, sumArrayBoolean, isObjectInArray, isObjectAttrInArray, createArrayOfLength, flattenArray, sortArrayByAttribute, getArrayLastNElements } from './array';
 
+import * as ArrayLib from './array';
+
 test('arrayBooleanToInt', () => {
   const a = [false, true, true];
 
@@ -77,4 +79,59 @@ test('getArrayLastNElements', () => {
   const r = getArrayLastNElements(a,3);
 
   expect(r).toEqual(e);
-})
+});
+
+test('isNestedObjectAttrInArray', () => {
+  const k = 7;
+  const arr = [{country: {id: 4}}, {country: {id: 6}}, {country: {id: 7}}];
+  const nest = 'country';
+  const r = ArrayLib.isNestedObjectAttrInArray(k, arr, nest);
+
+  expect(r).toEqual(2);
+});
+
+test('compareArrayEntriesDepth', () => {
+  const a = {name: 'France'};
+  const b = {name: 'Germany'};
+  const attr = 'name';
+
+  const r = ArrayLib.compareArrayEntriesDepth(a, b, attr);
+
+  expect(r).toEqual(-1);
+});
+
+test('compareArrayEntries', () => {
+  const a = 'one';
+  const b = 'two';
+
+  expect(ArrayLib.compareArrayEntries(a, b)).toEqual(-1)
+});
+
+test('compareArrayEntriesWattr', () => {
+  const a = {name: 'France'};
+  const b = {name: 'Germany'};
+  const attr = 'name';
+
+  expect(ArrayLib.compareArrayEntriesWAttr(a, b, 'name')).toEqual(-1)
+});
+
+test('isValueInArray', () => {
+  const array = [{id: 3}, {id: 5}];
+  const value = 5;
+
+  expect(ArrayLib.isValueInArray(array, value)).toEqual({id: 5});
+});
+
+test('findArrayIndexOfValue', () => {
+  const array = [3, 5];
+  const value = 5;
+  expect(ArrayLib.findArrayIndexOfValue(array, value)).toEqual(1);
+  expect(array.indexOf(value)).toEqual(1);
+});
+
+test('findArrayIndexOfValueByAttr', () => {
+  const array = [{id: 3}, {id: 5}];
+  const value = 5;
+  expect(ArrayLib.findArrayIndexOfValueByAttr(array, value)).toEqual(1);
+  expect(array.map(_ => _.id).indexOf(value)).toEqual(1);
+});
