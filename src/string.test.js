@@ -84,3 +84,12 @@ test('is email', () => {
     expect(S.isEmail(email)).toEqual(false);
   });
 });
+
+test('camelToSnakeCase', () => {
+  expect(S.camelToSnakeCase('isCamelCase')).toEqual('is_camel_case');
+});
+
+
+test('snakeToCamelCase', () => {
+  expect(S.snakeToCamelCase('is_snake_case')).toEqual('isSnakeCase');
+});

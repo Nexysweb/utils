@@ -140,3 +140,8 @@ export const isEmail = email => {
 
   return regexResult.includes(email);
 }
+
+// NOTE: more complete - .lodash.snakeCase()
+export const camelToSnakeCase = str => str.replace(/([a-z1-9])\.?(?=[A-Z]+)/g, '$1_').toLowerCase();
+
+export const snakeToCamelCase = str => str.replace(/(\_\w)/g, c => c[1].toUpperCase());
