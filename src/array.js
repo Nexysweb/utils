@@ -1,3 +1,6 @@
+// resources for array
+// https://medium.com/@alvaro.saburido/set-theory-for-arrays-in-es6-eb2f20a61848
+
 import { sum } from './number';
 
 /**
