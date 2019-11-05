@@ -118,32 +118,26 @@ const yearsList = (n, date) => {
 /**
  * add months to date
  * @param date: date to add months to
- * @param n: number of months
+ * @param n: number of months // by default add 1 months
  * @return new date
  */
-const addMonths = (date, n) => {
-  // by default add 1 months
-  if (typeof n === 'undefined') {
-    n = 1;
-  }
-
+const addMonths = (date, n = 1) => {
   return new Date(new Date(date).setMonth(date.getMonth() + n));
 };
 
 /**
  * add days to date
  * @param date: date to add days to
- * @param n: number of days
+ * @param n: number of days // by default add 1 day
  * @return new date
  */
-const addDays = (date, n) => {
-  // by default add 1 day
-  if (typeof n === 'undefined') {
-    n = 1;
-  }
-
+const addDays = (date, n = 1) => {
   return new Date(new Date(date).setDate(date.getDate() + n));
 };
+
+export const addMs = (date, n) => {
+  return new Date((new Date(date)).setMilliseconds(n));
+}
 
 /**
  * find number of day in one month

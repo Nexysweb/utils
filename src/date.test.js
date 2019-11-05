@@ -1,5 +1,13 @@
 import {format, formatDate, formatDateFromObject, formatTime, parseDate, addYears, yearsList, addMonths, addDays, findNumberOfDaysInMonth, countDaysDiffBtnDates, dateToISO} from './date'
 
+import * as DateLib from './date';
+
+test('add ms', () => {
+  const date1 = new Date('2019-03-04T23:00:00.000Z');
+  const date2 = new Date('2019-03-04T23:00:02.000Z');
+  expect(DateLib.addMs(date1, 2*1000)).toEqual(date2)
+});
+
 test('add days', () => {
   const date1 = new Date('2019-03-04T23:00:00.000Z');
   const date2 = new Date('2019-03-07T23:00:00.000Z');
