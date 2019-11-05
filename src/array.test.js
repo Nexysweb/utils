@@ -136,8 +136,18 @@ test('findArrayIndexOfValueByAttr', () => {
   expect(array.map(_ => _.id).indexOf(value)).toEqual(1);
 });
 
-test('shuffle', () => {
+test('shuffle - integers', () => {
   const a = [1, 2, 3, 4, 5];
+  const s = ArrayLib.shuffle(a);
+
+  const aSorted = s.map(x => JSON.stringify(x)).sort();
+  const sSorted = s.map(x => JSON.stringify(x)).sort();
+
+  expect(JSON.stringify(aSorted)).toEqual(JSON.stringify(sSorted));
+});
+
+test('shuffle - objects', () => {
+  const a = [{id: 3, name: 'France'}, {id: 1, name: 'Austria'}, {id: 4, name: 'Germany'}, {id: 2, name: 'Italy'}, {id: 5, name: 'Switzerland'}];
   const s = ArrayLib.shuffle(a);
 
   const aSorted = s.map(x => JSON.stringify(x)).sort();
