@@ -4,7 +4,7 @@
  */
 import {padding} from './string';
 
-const format = {
+export const format = {
   date: 'd-m-Y',
   dateTime: 'd-m-Y H:i'
 };
@@ -14,7 +14,7 @@ const format = {
  * @param  timestamp: timestamp to format
  * @return formatted date
 */
-const formatDate = timestamp => {
+export const formatDate = timestamp => {
   if (typeof timestamp === 'undefined') {
     return '';
   }
@@ -32,7 +32,7 @@ const formatDate = timestamp => {
  * @param  obj: date object
  * @return formatted date
 */
-const formatDateFromObject = obj => {
+export const formatDateFromObject = obj => {
   if (typeof obj !== 'object') {
     return '';
   }
@@ -47,7 +47,7 @@ const formatDateFromObject = obj => {
  * @param  timestamp: timestamp to format
  * @return formatted time
 */
-const formatTime = timestamp => {
+export const formatTime = timestamp => {
   const date = new Date(timestamp);
   const seconds = date.getSeconds();
   const minutes = date.getMinutes();
@@ -61,7 +61,7 @@ const formatTime = timestamp => {
  * @return object with different date elements
  * note: Js indexes month beginning at 0, we want the "normal" month number, e.g. January => 1
  */
-const parseDate = date => {
+export const parseDate = date => {
   return {
     day: date.getDate(),
     month: (date.getMonth() + 1),
@@ -77,7 +77,7 @@ const parseDate = date => {
  * @param n: number of years
  * @return new date
  */
-const addYears = (date, n) => {
+export const addYears = (date, n) => {
   // by default add 1 year
   if (typeof n === 'undefined') {
     n = 1;
@@ -91,7 +91,7 @@ const addYears = (date, n) => {
  * @param  date: date until which list of years is given (default: now)
  * @return list of years until given date
  */
-const yearsList = (n, date) => {
+export const yearsList = (n, date) => {
   if (typeof n === 'undefined') {
     n = 4;
   }
@@ -121,7 +121,7 @@ const yearsList = (n, date) => {
  * @param n: number of months // by default add 1 months
  * @return new date
  */
-const addMonths = (date, n = 1) => {
+export const addMonths = (date, n = 1) => {
   return new Date(new Date(date).setMonth(date.getMonth() + n));
 };
 
@@ -131,7 +131,7 @@ const addMonths = (date, n = 1) => {
  * @param n: number of days // by default add 1 day
  * @return new date
  */
-const addDays = (date, n = 1) => {
+export const addDays = (date, n = 1) => {
   return new Date(new Date(date).setDate(date.getDate() + n));
 };
 
@@ -146,7 +146,7 @@ export const addMs = (date, n) => {
  * @see http://stackoverflow.com/questions/9711454/how-to-get-the-last-date-of-a-particular-month-with-jodatime
  * @return number of days in month
  */
-const findNumberOfDaysInMonth = (month, year) => {
+export const findNumberOfDaysInMonth = (month, year) => {
   // set default year if not given as param
   if (typeof year === 'undefined') {
     year = new Date().getFullYear();
@@ -171,7 +171,7 @@ const findNumberOfDaysInMonth = (month, year) => {
  * @param d1, d2 - dates to count days between
  * @return number of days
  */
-const countDaysDiffBtnDates = (d1, d2) => {
+export const countDaysDiffBtnDates = (d1, d2) => {
   const oneDay = 24 * 60 * 60 * 1000;
   return Math.ceil(Math.abs((d1.getTime() - d2.getTime()) / (oneDay)));
 };
@@ -181,12 +181,10 @@ const countDaysDiffBtnDates = (d1, d2) => {
  * @param d date  to convert
  * @return ISO date
  */
-const dateToISO = d => {
+export const dateToISO = d => {
   if (d && typeof d.getMonth !== 'function') {
     d = new Date(d).toISOString();
   }
 
   return d;
 };
-
-export {format, formatDate, formatDateFromObject, formatTime, parseDate, addYears, yearsList, addMonths, addDays, findNumberOfDaysInMonth, countDaysDiffBtnDates, dateToISO};
