@@ -37,11 +37,14 @@ export const transpose = (arr, fn = a => a) => {
  * @param key - the attribute to group by
  * @return array of groups
  */
-export const groupBy = (arr, key) => {
-  return arr.reduce((rv, x) => {
-    (rv[x[key]] = rv[x[key]] || []).push(x);
-    return rv;
-  }, {});
+export const groupBy = function(arr, key) {
+  const callback = function(acc, v) {
+    (acc[get(key, v)] = acc[get(key, v)] || []).push(v);
+    return acc;
+  }
+
+  const grouped = arr.reduce(callback, {});
+  return grouped; 
 };
 
 export const unique = function(arr, prop) {
@@ -209,5 +212,44 @@ export const compareObj = (a, b, attr) => {
 
   return valueA.localeCompare(valueB);
 };
+
+
+/**
+ * look at a new record and compares it against a list of already existing records and decide it it needs to be added, edited, is a duplicate or do nothing
+ * @param  {[type]}  newRecord: new record
+ * @param  {[type]}  oldRecords: records to be compared against
+ * @param  {Boolean} isRecordFound: compares new record with one of the prevous record
+ * @param  {Boolean} isDuplicate: defined whether duplicates or not (comes after `isRecordFound`)
+ * @param  {Boolean} isNotNull: conditions that make the new record not null and hence to be added =
+ * @return list of [edit, duplicate, add, warning] rows
+ */
+export const compareWithArray = (newRecord, oldRecords, isRecordFound, isDuplicate = x => false, isNotNull = x => true) => {
+  // check if figure already exists in db
+  const recordFound = oldRecords.find(x => isRecordFound(newRecord, x));
+
+  if (recordFound) {
+    console.log('here')
+    // remove entry from array to increase search speed for subsequent entries
+    //delete(oldRecords.indexOf(recordFound));
+    // check if value is the same, if not, need to edit
+    if(isDuplicate(recordFound, newRecord)) {
+      // update the value
+      // update the importlog
+      // which is equivalent to take the newer input var
+
+      // add to edits
+      return {edit: true, data: newRecord, id: recordFound.id };
+    } else {
+      return {duplicate: true, id: recordFound.id, message: 'the same figure was already found in the system', data: newRecord};
+    }
+  } else {
+    if (isNotNull(newRecord)) {
+      return {add: true, data: newRecord};
+    } else {
+      // no action completed, return false
+      return {warning: true, message: 'not imported the value is non existent (null)', data: newRecord};
+    }
+  }
+}
 
 
