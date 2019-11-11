@@ -29,10 +29,23 @@ test('getGoogleMapsAddressLink', () => {
 })
 
 test('url resolve', () => {
-  const target = 'http://google.com';
+  const target = 'http://google.com/';
   const uri = '/my/path';
-  const r = resolve(target, uri);
-  const e = 'http://google.com/my/path';
+  const r0 = resolve(target, uri);
+  const e0 = 'http://google.com/my/path';
 
-  expect(r).toEqual(e);
-})
+  expect(r0).toEqual(e0);
+
+  // https://nodejs.org/api/url.html#url_url_resolve_from_to
+  const r1 = resolve('/one/two/three', 'four');         
+  const e1 = '/one/two/four';
+  expect(r1).toEqual(e1);
+  const r2 = resolve('http://example.com/', '/one');    // ''
+  const e2 = 'http://example.com/one'
+  expect(r2).toEqual(e2);
+  const r3 = resolve('http://example.com/one', '/two'); // ''
+  const e3 = 'http://example.com/two';
+  expect(r3).toEqual(e3);
+});
+
+
