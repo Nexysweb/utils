@@ -35,3 +35,9 @@ jobs:
 
       # run tests!
       - run: yarn test
+
+
+# here automatially push to npm registry
+# yarn build
+# npm version patch
+# npm publish

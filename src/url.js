@@ -50,3 +50,14 @@ export const replaceParams = (uri, params, curly=false) => {
 
   return uri;
 };
+
+/**
+ * "resolves" url
+ * this is to aoid using the extra package `url`: https://www.npmjs.com/package/url: https://github.com/defunctzombie/node-url/blob/13a35bd35a2cdf3fbfa7ee9c6ed5b927a48d6821/url.js#L438
+ * @param  host
+ * @param  path
+ * @return full url
+ */
+export const resolve = (host, path) => {
+  return host + path;
+}
