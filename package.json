@@ -10,7 +10,6 @@
     "build": "rimraf dist/ && babel src/ --out-dir dist/;rm dist/*.test.js"
   },
   "files": [
-    "index.js",
     "dist/*"
   ],
   "devDependencies": {

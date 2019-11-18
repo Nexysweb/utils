@@ -59,21 +59,23 @@ export const replaceParams = (uri, params, curly=false) => {
  * @param  path
  * @return full url
  */
-export const resolve = (target, pathIn) => {
-  // extract host
+export const resolve = (hostIn, pathIn) => {
+  // match host until trailing slash
   const re = /^(.*)\/[^\/]*$/;
-  const reResult = target.match(re);
+  const hostMatch = hostIn.match(re);
+
+  let host = hostMatch && hostMatch[1];
+  if ((host === 'http:/' || host === 'https:/') && !hostIn.endsWith('/')) {
+    host = hostIn;
+  }
 
   // extract path
   const reSlash = /^\/{0,1}(.*)$/
-  const reResSlash = pathIn.match(reSlash);
+  const pathMatch = pathIn.match(reSlash);
 
-  // make sure regexp work and return result
-  if (reResult && reResult[1] && reResSlash && reResSlash[1]) {
-    const host = reResult[1];
-    const path = reResSlash[1];
-    return host + '/' + path;
-  }
+  const path = pathMatch && pathMatch[1];
 
-  return null; //host + path;
+  if (host && path) {
+    return `${host}/${path}`;
+  } else return null;
 }

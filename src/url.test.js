@@ -48,4 +48,11 @@ test('url resolve', () => {
   expect(r3).toEqual(e3);
 });
 
+test('url resolve 2', () => {
+  const target = 'http://google.com';
+  const uri = '/my/path';
+  const r0 = resolve(target, uri);
+  const e0 = 'http://google.com/my/path';
 
+  expect(r0).toEqual(e0);
+});
