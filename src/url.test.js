@@ -29,7 +29,7 @@ test('getGoogleMapsAddressLink', () => {
 })
 
 test('url resolve', () => {
-  const target = 'http://google.com/';
+  const target = 'http://google.com';
   const uri = '/my/path';
   const r0 = resolve(target, uri);
   const e0 = 'http://google.com/my/path';
