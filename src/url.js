@@ -55,6 +55,7 @@ export const replaceParams = (uri, params, curly=false) => {
  * "resolves" url
  * this is to aoid using the extra package `url`: https://www.npmjs.com/package/url: https://github.com/defunctzombie/node-url/blob/13a35bd35a2cdf3fbfa7ee9c6ed5b927a48d6821/url.js#L438
  * https://nodejs.org/api/url.html#url_url_resolve_from_to
+ * NOTE: beware - this implementation requires you to add trailing slashes to domain names (https://searchfacts.com/url-trailing-slash/)
  * @param  host
  * @param  path
  * @return full url
