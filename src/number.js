@@ -2,9 +2,10 @@
  * parse number into formatted number
  * @param v: number
  * @param p: precision
+ * @param delimiter: thousand separator, default " ' "
  * @see http://stackoverflow.com/questions/149055/how-can-i-format-numbers-as-money-in-javascript
  */
-const formatNumber = (v, precision) => {
+const formatNumber = (v, precision, delimiter = '\'') => {
   // by default decimal precision is 2
   if (typeof (precision) === 'undefined') {
     precision = 2;
@@ -12,7 +13,7 @@ const formatNumber = (v, precision) => {
   let nr = v;
 
   if (typeof (v) === 'string') {
-    nr = v.replace(',', '\'');
+    nr = v.replace(',', delimiter);
   }
   const pf = parseFloat(nr);
 
