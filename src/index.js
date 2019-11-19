@@ -5,6 +5,7 @@ import * as number from './number.js';
 import * as random from './random.js';
 import * as string from './string.js';
 import * as url from './url.js';
+import * as regex from './regex.js';
 
 const d = {
   array,
@@ -13,7 +14,8 @@ const d = {
   number,
   random,
   string,
-  url
+  url,
+  regex
 };
 
 export {
@@ -23,7 +25,8 @@ export {
   number,
   random,
   string,
-  url
+  url,
+  regex
 };
 
 export default d;
