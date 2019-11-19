@@ -52,7 +52,7 @@ export const unique = function(arr, prop) {
     return prop ? get(prop, obj) : obj 
   });
 
-  return arr.filter(function(obj, i) { return temp.indexOf(prop ? get(prop, obj) : obj) == i; });
+  return arr.filter((obj, i) => temp.indexOf(prop ? get(prop, obj) : obj) == i);
 }
 
 /**
@@ -71,10 +71,15 @@ export const deserialize = str => str.split(',').reduce((r, item) => {
   return r;
 }, {});
 
-export const removeProp = (obj, prop) => {
-  return Object.keys(obj)
-    .reduce((acc, key) => key !== prop ? ({...acc, [key]: obj[key]}) : acc, {});
-};
+export const keepProps = (obj, props) => {
+  if (!props || !Array.isArray(props)) return obj;
+
+  return Object.entries(obj)
+    .reduce((acc, [key, value]) => props.includes(key) ? ({...acc, [key]: value}) : acc, {});
+}   
+
+export const removeProp = (obj, prop) => Object.keys(obj)
+  .reduce((acc, key) => key !== prop ? ({...acc, [key]: obj[key]}) : acc, {});
 
 export const removeProps = (obj, props) => {
   while (props.length > 0) {
@@ -90,8 +95,8 @@ export const removeProps = (obj, props) => {
  * @return o[p] respectively o[p1][p2]...
  */
 export const get = function(p, o) { 
-  return p.split(".").reduce(function(xs, x) {
-    if (xs && xs[x]) return xs[x];
+  return p.split(".").reduce((xs, x) => {
+    if (xs && (xs[x] || xs[x] === 0 || xs[x] === false)) return xs[x];
     else return null;
   }, o);
 };
@@ -213,7 +218,6 @@ export const compareObj = (a, b, attr) => {
   return valueA.localeCompare(valueB);
 };
 
-
 /**
  * look at a new record and compares it against a list of already existing records and decide it it needs to be added, edited, is a duplicate or do nothing
  * @param  {[type]}  newRecord: new record
@@ -251,5 +255,3 @@ export const compareWithArray = (newRecord, oldRecords, isRecordFound, isDuplica
     }
   }
 }
-
-
