@@ -13,7 +13,7 @@ const formatNumber = (v, precision, delimiter = '\'') => {
   let nr = v;
 
   if (typeof (v) === 'string') {
-    nr = v.replace(',', delimiter);
+    nr = v.replace(delimiter, '');
   }
   const pf = parseFloat(nr);
 

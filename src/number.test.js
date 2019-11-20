@@ -5,11 +5,13 @@ test('format', () => {
 });
 
 test('format number with delimiters', () => {
-  const v = "123'123.00";
-  expect(formatNumber(123123)).toEqual(v);
+  const v1 = "123'123";
+  const e1 = "123'123.00";
 
-  const v2 = "123'123";
-  expect(formatNumber(123123, 0)).toEqual(v2);
+  const v2 = 123456;
+  const e2 = "123'456.00";
+  expect(formatNumber(v1)).toEqual(e1);
+  expect(formatNumber(v2)).toEqual(e2);
 })
 
 test('format mini', () => {
