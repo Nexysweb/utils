@@ -41,6 +41,11 @@ jobs:
       # run tests!
       - run: yarn test
 
+deployment:
+  npm:
+    tag: /v[0-9]+(\.[0-9]+)*/
+        commands:
+      - npm publish
 
 
 # here automatially push to npm registry
