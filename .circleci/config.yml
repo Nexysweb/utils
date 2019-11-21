@@ -60,6 +60,10 @@ jobs:
             - v1-dependencies-   
 
       - run:
+          command: |
+            yarn install
+
+      - run:
           name: Publish to NPM
           command: |
             yarn build
