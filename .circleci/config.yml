@@ -35,7 +35,6 @@ jobs:
       - run:
           command: |
             yarn install
-            yarn build
 
       - save_cache:
           paths:
@@ -48,6 +47,7 @@ jobs:
       - run:
           name: Publish to NPM
           command: |
+            yarn build
             npm set //registry.npmjs.org/:_authToken=$NPM_TOKEN
             npm publish
         #  npm set //registry.npmjs.org/:_authToken=$NPM_TOKEN
