@@ -45,6 +45,9 @@ jobs:
       - run: yarn test
 
       - run:
+          filters:
+              tags:
+                  only: /.*/
           name: Publish to NPM
           command: |
             yarn build
