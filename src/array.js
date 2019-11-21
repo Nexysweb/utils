@@ -225,6 +225,7 @@ export const findArrayIndexOfValueByAttr = (array, value, attr) => {
   return r;
 };
 
+
 /**
  * @return last n elements of array
  * @param array
