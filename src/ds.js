@@ -152,6 +152,10 @@ export const isEmpty = obj => {
   return true;
 }
 
+export const hasProp = (o, prop) => {
+  return !isEmpty(o) && prop && (prop in o);
+}
+
 /**
  * removes prefix for all keys
  */
