@@ -233,3 +233,8 @@ test('compare object - missing input', () => {
   const r1 = DSUtils.compareObj(a, b, attr);
   expect(r1).toEqual(0);
 });
+
+test('hasProp', () => {
+  expect(DSUtils.hasProp({a: 'a value'}, 'a')).toEqual(true);
+  expect(DSUtils.hasProp({a: 'a value'}, 'b')).toEqual(false);
+})
