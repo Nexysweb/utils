@@ -153,6 +153,14 @@ export const isEmpty = obj => {
 }
 
 /**
+ * check if object has prop
+ * @param   o: object
+ * @param  prop: prop of interest
+ * @return boolean
+ */
+export const hasProp = (o, prop) => !isEmpty(o) && prop && (prop in o);
+
+/**
  * removes prefix for all keys
  */
 export const removePrefix = (obj, prefix) => {
