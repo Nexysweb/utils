@@ -6,6 +6,7 @@ import * as random from './random.js';
 import * as string from './string.js';
 import * as url from './url.js';
 import * as regex from './regex.js';
+import * as color from './color';
 
 const d = {
   array,
@@ -26,7 +27,8 @@ export {
   random,
   string,
   url,
-  regex
+  regex,
+  color
 };
 
 export default d;
