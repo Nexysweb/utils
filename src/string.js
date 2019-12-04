@@ -145,3 +145,10 @@ export const isEmail = email => {
 export const camelToSnakeCase = str => str.replace(/([a-z1-9])\.?(?=[A-Z]+)/g, '$1_').toLowerCase();
 
 export const snakeToCamelCase = str => str.replace(/(\_\w)/g, c => c[1].toUpperCase());
+
+/**
+ * lowers the first char of a string (rest of string remains intact)
+ * @param s: input string
+ * @return inut string with first char as lower case
+ */
+export const lowerFirst = s => typeof s == 'string' ? s.charAt(0).toLowerCase() + s.substr(1) : s;
