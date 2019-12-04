@@ -263,3 +263,18 @@ export const compareWithArray = (newRecord, oldRecords, isRecordFound, isDuplica
     }
   }
 }
+
+/**
+ * get list of "linezrized" keys for an object (where  linearized is nesting represented by '.')
+ * @param   o : input object
+ * @return ['key1', 'key2', ...]
+ */
+export const getLinearizedKeys = o => {
+  return Object.keys(o).map(key => {
+    let value = o[key];
+    if (value != null && typeof value == 'object') {
+      const nestedKeys = getLinearizedKeys(value);
+      return nestedKeys.map(item => `${key}.${item}`);
+    } else return key;
+  }).flat();
+}

@@ -237,4 +237,11 @@ test('compare object - missing input', () => {
 test('hasProp', () => {
   expect(DSUtils.hasProp({a: 'a value'}, 'a')).toEqual(true);
   expect(DSUtils.hasProp({a: 'a value'}, 'b')).toEqual(false);
+});
+
+test('getLinearizedKeys', () => {
+  const obj = {k1: 'v1', k2: {k21: 'v21', k22: 'v22'}, k3: 'v3'};
+  const out = ['k1', 'k2.k21', 'k2.k22', 'k3'];
+
+  expect(DSUtils.getLinearizedKeys(obj)).toEqual(out);
 })
