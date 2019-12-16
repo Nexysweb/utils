@@ -1,4 +1,4 @@
-import {format, formatDate, formatDateFromObject, formatTime, parseDate, addYears, yearsList, addMonths, addDays, findNumberOfDaysInMonth, countDaysDiffBtnDates, dateToISO} from './date'
+import {format, formatDate, formatDateFromObject, formatTime, parseDate, addYears, yearsList, addMonths, addDays, findNumberOfDaysInMonth, countDaysDiffBtnDates, dateToISO} from './date';
 
 import * as DateLib from './date';
 
@@ -91,3 +91,7 @@ test('dateToISO', () => {
   const date2 = new Date(isoString)
   expect(dateToISO(date1)).toEqual(date2);
 });
+
+test('month names', () => {
+  expect(DateLib.monthNames.length).toEqual(12);
+})

@@ -4,6 +4,16 @@ test('format', () => {
   expect(formatNumber(23.1234)).toEqual('23.12');
 });
 
+test('format number with delimiters', () => {
+  const v1 = "123'123";
+  const e1 = "123'123.00";
+
+  const v2 = 123456;
+  const e2 = "123'456.00";
+  expect(formatNumber(v1)).toEqual(e1);
+  expect(formatNumber(v2)).toEqual(e2);
+})
+
 test('format mini', () => {
   expect(formatNumberMini(23.1234)).toEqual('23.12');
 });

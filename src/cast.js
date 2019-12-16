@@ -1,5 +1,4 @@
-// cast different types to anoterh types
-
+// cast different types to another type
 export const toDecimal = (s) => {
   const r = parseFloat(s); // better to use `Number`
 

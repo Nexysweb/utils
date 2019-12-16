@@ -23,12 +23,12 @@ test('distinct', () => {
 });
 
 /* does not work with objevts 
-test('distinct with objects', () => {
-  const a = [{name: 'elephant'}, {name: 'lion'}, {name: 'elephant'}, {name: 'leopard'}, {name: 'elephant'}, {name: 'wilderbeest'}, {name: 'rhinoceros'}];
-  const r = distinct(a);
-  const e = [{name: 'elephant'}, {name: 'lion'}, {name: 'leopard'} ,{name: 'wilderbeest'}, {name: 'rhinoceros'}];
-  expect(r).toEqual(e);
-});
+  test('distinct with objects', () => {
+    const a = [{name: 'elephant'}, {name: 'lion'}, {name: 'elephant'}, {name: 'leopard'}, {name: 'elephant'}, {name: 'wilderbeest'}, {name: 'rhinoceros'}];
+    const r = distinct(a);
+    const e = [{name: 'elephant'}, {name: 'lion'}, {name: 'leopard'} ,{name: 'wilderbeest'}, {name: 'rhinoceros'}];
+    expect(r).toEqual(e);
+  });
 */
 
 test('group by', () => {
@@ -234,6 +234,10 @@ test('compare object - missing input', () => {
   expect(r1).toEqual(0);
 });
 
+test('hasProp', () => {
+  expect(DSUtils.hasProp({a: 'a value'}, 'a')).toEqual(true);
+  expect(DSUtils.hasProp({a: 'a value'}, 'b')).toEqual(false);
+});
 
 test('nest', () => {
   const result = DSUtils.nest({'profile.firstName': 'test', 'profile.lastName': 'test2'});
@@ -348,4 +352,11 @@ test('linearize', () => {
   ];
 
   expect(result).toEqual(output);
+});
+
+test('getLinearizedKeys', () => {
+  const obj = {k1: 'v1', k2: {k21: 'v21', k22: 'v22'}, k3: 'v3'};
+  const out = ['k1', 'k2.k21', 'k2.k22', 'k3'];
+
+  expect(DSUtils.getLinearizedKeys(obj)).toEqual(out);
 });

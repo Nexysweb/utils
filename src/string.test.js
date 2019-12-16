@@ -93,3 +93,8 @@ test('camelToSnakeCase', () => {
 test('snakeToCamelCase', () => {
   expect(S.snakeToCamelCase('is_snake_case')).toEqual('isSnakeCase');
 });
+
+test('lowerFirst', () => {
+  expect(S.lowerFirst('ASD')).toEqual('aSD');
+  expect(S.lowerFirst('Asd')).toEqual('asd');
+})

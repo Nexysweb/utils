@@ -188,3 +188,5 @@ export const dateToISO = d => {
 
   return d;
 };
+
+export const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Seq', 'Oct', 'Nov', 'Dec'];

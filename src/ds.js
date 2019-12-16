@@ -153,6 +153,14 @@ export const isEmpty = obj => {
 }
 
 /**
+ * check if object has prop
+ * @param   o: object
+ * @param  prop: prop of interest
+ * @return boolean
+ */
+export const hasProp = (o, prop) => !isEmpty(o) && prop && (prop in o);
+
+/**
  * removes prefix for all keys
  */
 export const removePrefix = (obj, prefix) => {
@@ -331,4 +339,19 @@ export const linearize = (obj, keys=[]) => {
   });
 
   return list;
+}
+
+/**
+ * get list of "linezrized" keys for an object (where  linearized is nesting represented by '.')
+ * @param   o : input object
+ * @return ['key1', 'key2', ...]
+ */
+export const getLinearizedKeys = o => {
+  return Object.keys(o).map(key => {
+    let value = o[key];
+    if (value != null && typeof value == 'object') {
+      const nestedKeys = getLinearizedKeys(value);
+      return nestedKeys.map(item => `${key}.${item}`);
+    } else return key;
+  }).flat();
 }
