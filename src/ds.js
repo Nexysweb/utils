@@ -264,6 +264,83 @@ export const compareWithArray = (newRecord, oldRecords, isRecordFound, isDuplica
   }
 }
 
+export const isObject = item => {
+  if (!item) return false;
+
+  if (item.isJoi) return false;
+  else return typeof item === 'object' && !Array.isArray(item) && item !== null;
+}
+
+export const deepMerge = (target, source) => {
+  if (isObject(target) && isObject(source)) {
+    Object.entries(source).forEach(([key, sourceValue]) => {
+      if (isObject(sourceValue)) {
+        if (!target[key]) {
+          Object.assign(target, {[key]: {}});
+        } 
+
+        const next = target[key];
+        deepMerge(next, sourceValue);
+      } else {
+        Object.assign(target, {[key]: sourceValue});
+      }
+    });
+  }
+
+  return target;
+}
+
+export const nest = (data, props=[]) => {
+  if (data === undefined || data === null) return null;
+
+  if (props.length === 0) {
+    // NOTE: handle object => array
+    if (!Array.isArray(data)) {
+      data = Object.entries(data).map(([key, value]) => ({key, value}));
+    }
+
+    // NOTE: if array empty - return empty object
+    if (data.length === 0) return {};
+
+    let nested = {};
+    data.forEach(({key, value}) => {
+      const props = key.split('.');
+      const obj = nest(value, props);
+      nested = deepMerge(nested, obj);
+    });
+
+    return nested;
+  } else {
+    const value = data;
+    const [prop, ...rest] = props;
+    if (rest.length === 0) {
+      return { [prop]: value };
+    }
+  
+    const result = nest(value, [...rest]);
+    return { [prop]: result };
+  }
+}
+
+/**
+ * Takes a json object and flattens it
+ * {'a': {'b': 'c'}, 'd': 'e'} -> [{key: 'a.b', value: 'c'}, {key: 'd', value: 'e'}]
+**/
+export const linearize = (obj, keys=[]) => {
+  let list = [];
+  Object.entries(obj).map(([key, value]) => {
+    const next = [...keys, key];
+    if (isObject(value)) {
+      const subList = linearize(value, next);
+      list = [...list, ...subList];
+    } else {
+      list.push({key: next.join('.'), value});
+    }
+  });
+
+  return list;
+}
+
 /**
  * get list of "linezrized" keys for an object (where  linearized is nesting represented by '.')
  * @param   o : input object
