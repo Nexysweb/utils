@@ -313,3 +313,18 @@ export const nest = (data, props=[]) => {
     return { [prop]: result };
   }
 }
+
+export const linearize = (obj, keys=[]) => {
+  let list = [];
+  Object.entries(obj).map(([key, value]) => {
+    const next = [...keys, key];
+    if (isObject(value)) {
+      const subList = linearize(value, next);
+      list = [...list, ...subList];
+    } else {
+      list.push({key: next.join('.'), value});
+    }
+  });
+
+  return list;
+}

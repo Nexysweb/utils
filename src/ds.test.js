@@ -264,7 +264,6 @@ test('nest value false', () => {
   });
 });
 
-
 test('deep merge', () => {
   const a = {
     a: {
@@ -329,4 +328,24 @@ test('deep merge 2', () => {
       next_page_url: null
     }
   });
+});
+
+test('linearize', () => {
+  const data = {
+    profile: {
+      firstName: 'test',
+      lastName: 'test2'
+    },
+    email: 'test@test'
+  };
+
+  const result = DSUtils.linearize(data);
+
+  const output = [
+    { key: 'profile.firstName', value: 'test' },
+    { key: 'profile.lastName', value: 'test2' },
+    { key: 'email', value: 'test@test' }
+  ];
+
+  expect(result).toEqual(output);
 });
