@@ -314,6 +314,10 @@ export const nest = (data, props=[]) => {
   }
 }
 
+/**
+ * Takes a json object and flattens it
+ * {'a': {'b': 'c'}, 'd': 'e'} -> [{key: 'a.b', value: 'c'}, {key: 'd', value: 'e'}]
+**/
 export const linearize = (obj, keys=[]) => {
   let list = [];
   Object.entries(obj).map(([key, value]) => {
