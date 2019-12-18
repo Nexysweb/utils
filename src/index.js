@@ -1,4 +1,3 @@
-import * as file from './file/index.js'
 import * as array from './array.js';
 import * as date from './date.js';
 import * as ds from './ds.js';
@@ -10,7 +9,6 @@ import * as regex from './regex.js';
 import * as color from './color';
 
 const exports = {
-  file,
   array,
   date,
   ds,
@@ -22,7 +20,6 @@ const exports = {
 };
 
 export {
-  file,
   array,
   date,
   ds,

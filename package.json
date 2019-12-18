@@ -7,7 +7,7 @@
   },
   "scripts": {
     "test": "rimraf dist/ && jest ",
-    "build": "rimraf dist/ && babel src/ --out-dir dist/;rm dist/*.test.js"
+    "build": "rimraf dist/ && ./node_modules/.bin/babel src/ --out-dir dist/;rm dist/*.test.js"
   },
   "files": [
     "dist/*"
