@@ -50,7 +50,7 @@ jobs:
               only:
                 - master
             tags:
-             only: /^v.*/
+              only: /^v.*/
           name: Publish to NPM
           command: |
             yarn build
