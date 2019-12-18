@@ -151,4 +151,4 @@ export const snakeToCamelCase = str => str.replace(/(\_\w)/g, c => c[1].toUpperC
  * @param s: input string
  * @return inut string with first char as lower case
  */
-export const lowerFirst = s => typeof s == 'string' ? s.charAt(0).toLowerCase() + s.substr(1) : s;
+export const lowerFirst = s => typeof s === 'string' ? s.charAt(0).toLowerCase() + s.substr(1) : s;
