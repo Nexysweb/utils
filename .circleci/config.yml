@@ -49,8 +49,10 @@ jobs:
             branches:
               only:
                 - master
+
             #tags:
             # only: /^v.*/
+
           name: Publish to NPM
           command: |
             yarn build
