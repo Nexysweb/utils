@@ -2,7 +2,7 @@
  * Date utils
  * note: some functions do not work with Node, work with Moment?
  */
-import {padding} from './string';
+import { padding } from './string';
 
 export const format = {
   date: 'd-m-Y',

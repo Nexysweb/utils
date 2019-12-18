@@ -8,7 +8,7 @@ import * as url from './url.js';
 import * as regex from './regex.js';
 import * as color from './color';
 
-const d = {
+const exports = {
   array,
   date,
   ds,
@@ -31,4 +31,4 @@ export {
   color
 };
 
-export default d;
+export default exports;
