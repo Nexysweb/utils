@@ -11,4 +11,4 @@ console.log(a)
 
 ## Documentation
 
-use https://github.com/jsdoc/jsdoc?
+todo https://github.com/jsdoc/jsdoc
