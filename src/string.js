@@ -141,6 +141,26 @@ export const isEmail = email => {
   return regexResult.includes(email);
 }
 
+/**
+ * checks if input string is a valid UUID
+ * @param  {[type]} str     input UUID/string
+ * @param  {String} version UUID type: {'all', '3', '4' ,'5'}
+ * @return {[type]}         boolean
+ *
+ * taken from: https://github.com/validatorjs/validator.js/blob/master/src/lib/isUUID.js
+ */
+export const isUUID = (str, version = 'all')  => {
+  const patterns = {
+    3: /^[0-9A-F]{8}-[0-9A-F]{4}-3[0-9A-F]{3}-[0-9A-F]{4}-[0-9A-F]{12}$/i,
+    4: /^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i,
+    5: /^[0-9A-F]{8}-[0-9A-F]{4}-5[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i,
+    all: /^[0-9A-F]{8}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{12}$/i,
+  };
+
+  const pattern = patterns[version];
+  return pattern && pattern.test(str);
+}
+
 // NOTE: more complete - .lodash.snakeCase()
 export const camelToSnakeCase = str => str.replace(/([a-z1-9])\.?(?=[A-Z]+)/g, '$1_').toLowerCase();
 

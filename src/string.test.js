@@ -85,6 +85,15 @@ test('is email', () => {
   });
 });
 
+test('isUUID', () => {
+  expect(S.isUUID('this is clearly not a uuid')).toEqual(false);
+
+  // generate UUIDs: https://www.uuidgenerator.net/
+  expect(S.isUUID('6f06ad47-4621-4697-b1f9-44fcd65f9d00')).toEqual(true);
+  expect(S.isUUID('92958501-b249-46e2-8caf-9075985a2e27')).toEqual(true);
+  expect(S.isUUID('0362c242-c7c6-403c-a1ac-58f7e8522527')).toEqual(true);
+});
+
 test('camelToSnakeCase', () => {
   expect(S.camelToSnakeCase('isCamelCase')).toEqual('is_camel_case');
 });
