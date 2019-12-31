@@ -47,7 +47,8 @@ jobs:
       - run:
           filters:
             branches:
-              only: master
+              only:
+                - master
             tags:
              only: /^v.*/
           name: Publish to NPM
