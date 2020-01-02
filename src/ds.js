@@ -265,7 +265,7 @@ export const compareWithArray = (newRecord, oldRecords, isRecordFound, isDuplica
 }
 
 // NOTE: https://github.com/hapijs/joi/issues/2215
-export const isJoi = schema => schema.hasOwnProperty('$_root') || schema.hasOwnProperty('$_super');
+export const isJoi = schema => schema.isJoi || schema.hasOwnProperty('$_root') || schema.hasOwnProperty('$_super');
 
 export const isObject = item => {
   if (!item) return false;
