@@ -1,6 +1,6 @@
 {
   "name": "@nexys/utils",
-  "version": "3.5.12",
+  "version": "3.5.13",
   "main": "dist/index.js",
   "dependencies": {
     "@babel/runtime": "^7.5.5"
@@ -13,13 +13,6 @@
     "dist/*"
   ],
   "devDependencies": {
-    "@babel/cli": "^7.5.5",
-    "@babel/core": "^7.5.5",
-    "@babel/plugin-transform-runtime": "^7.5.5",
-    "@babel/preset-env": "^7.5.5",
-    "babel-jest": "^24.8.0",
-    "babel-preset-minify": "^0.5.1",
-    "jest": "^24.9.0",
-    "rimraf": "^3.0.0"
+    "@nexys/babelsetup": "^0.0.6"
   }
 }
