@@ -169,6 +169,7 @@ test('isempty', () => {
   expect(DSUtils.isEmpty(b)).toEqual(false);
   expect(DSUtils.isEmpty({})).toEqual(true);
   expect(DSUtils.isEmpty(undefined)).toEqual(true);
+  expect(DSUtils.isEmpty([])).toEqual(false);
 });
 
 test('remove prefix', () => {

@@ -147,6 +147,7 @@ export const updateObject = (form, newObj) => set(newObj.name, newObj.value, for
  * @return {[type]}     [description]
  */
 export const isEmpty = obj => {
+  if (Array.isArray(obj)) return false;
   if (!obj) return true;
   for (let key in obj) if(obj.hasOwnProperty(key)) return false;
   return true;
