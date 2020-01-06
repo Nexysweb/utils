@@ -147,6 +147,7 @@ export const updateObject = (form, newObj) => set(newObj.name, newObj.value, for
  * @return {[type]}     [description]
  */
 export const isEmpty = obj => {
+  if (Array.isArray(obj)) return false;
   if (!obj) return true;
   for (let key in obj) if(obj.hasOwnProperty(key)) return false;
   return true;
@@ -265,7 +266,7 @@ export const compareWithArray = (newRecord, oldRecords, isRecordFound, isDuplica
 }
 
 // NOTE: https://github.com/hapijs/joi/issues/2215
-export const isJoi = schema => schema.isJoi || schema.hasOwnProperty('$_root') || schema.hasOwnProperty('$_super');
+export const isJoi = schema => schema.hasOwnProperty('$_root') || schema.hasOwnProperty('$_super');
 
 export const isObject = item => {
   if (!item) return false;
