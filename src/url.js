@@ -79,3 +79,22 @@ export const resolve = (hostIn, pathIn) => {
     return `${host}/${path}`;
   } else return null;
 }
+
+/**
+ * https://stackoverflow.com/questions/901115/how-can-i-get-query-string-values-in-javascript
+ * @param  query string, can be obtained using: window.location.search
+ * @return params object
+ */
+export const getQueryStringParams = query => {
+  if (query) {
+    return (/^[?#]/.test(query) ? query.slice(1) : query)
+      .split('&')
+      .reduce((params, param) => {
+        let [key, value] = param.split('=');
+        params[key] = value ? decodeURIComponent(value.replace(/\+/g, ' ')) : '';
+        return params;
+      }, {})
+  }
+
+  return {};
+};

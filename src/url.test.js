@@ -1,5 +1,7 @@
 import { paramsToString, deserialize, replaceParams, getGoogleMapsAddressLink, resolve } from './url';
 
+import * as Url from './url';
+
 test('paramsToString', () => {
   const params = {a: 'fd', b: 23};
   const e = 'a=fd&b=23';
@@ -56,3 +58,9 @@ test('url resolve 2', () => {
 
   expect(r0).toEqual(e0);
 });
+
+test('getQueryStringParams', () => {
+  const query = '?arg1=v1&arg2=v2&arg3=v3';
+  const params = {arg1: 'v1', arg2: 'v2', arg3: 'v3'};
+  expect(Url.getQueryStringParams(query)).toEqual(params)
+})
