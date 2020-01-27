@@ -63,4 +63,11 @@ test('getQueryStringParams', () => {
   const query = '?arg1=v1&arg2=v2&arg3=v3';
   const params = {arg1: 'v1', arg2: 'v2', arg3: 'v3'};
   expect(Url.getQueryStringParams(query)).toEqual(params)
+});
+
+test('fixedEncodeURIComponent', () => {
+  const u = 'a space with spaces';
+  const out = 'a%20space%20with%20spaces';
+
+  expect(Url.fixedEncodeURIComponent(u)).toEqual(out);
 })

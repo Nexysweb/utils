@@ -99,3 +99,14 @@ export const getQueryStringParams = query => {
       return params;
     }, {});
 };
+
+/**
+ * encodeURI with more options
+ * To be more stringent in adhering to RFC 3986 (which reserves !, ', (, ), and *), even though these characters have no formalized URI delimiting uses, the following can be safely used:
+ * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/encodeURIComponent
+ */
+export const fixedEncodeURIComponent =  str => {
+  return encodeURIComponent(str).replace(/[!'()*]/g, c => {
+    return '%' + c.charCodeAt(0).toString(16);
+  })
+}
