@@ -1,18 +1,26 @@
 {
   "name": "@nexys/utils",
-  "version": "3.5.15",
+  "version": "3.6.0",
   "main": "dist/index.js",
   "dependencies": {
     "@babel/runtime": "^7.5.5"
   },
   "scripts": {
     "test": "rimraf dist/ && jest ",
-    "build": "rimraf dist/ && ./node_modules/.bin/babel src/ --out-dir dist/;rm dist/*.test.js"
+    "build": "rimraf dist/ && babel src/ --out-dir dist/ --extensions \".js,.ts\";rm dist/*.test.js",
+    "buildTs": "tsc --init --declaration --allowSyntheticDefaultImports --target esnext --outDir dist/"
   },
   "files": [
     "dist/*"
   ],
   "devDependencies": {
-    "@nexys/babelsetup": "^0.0.6"
+    "@babel/plugin-transform-typescript": "^7.8.3",
+    "@babel/preset-typescript": "^7.8.3",
+    "@nexys/babelsetup": "^0.0.6",
+    "@types/jest": "^24.9.1",
+    "@types/node": "^13.5.0",
+    "jest": "^25.1.0",
+    "ts-jest": "^25.0.0",
+    "typescript": "^3.7.5"
   }
 }

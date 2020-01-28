@@ -2,11 +2,12 @@ import * as S from './string';
 
 test('padding', () => {
   const e = '00034';
-  const m = '34';
+  const m = 34;
   const width = 5;
   const z = '0';
   expect(S.padding(m, width, z)).toEqual(e); 
 });
+
 
 test('contains', () => {
   expect(S.contains('string', 'str')).toEqual(true); 
@@ -107,3 +108,4 @@ test('lowerFirst', () => {
   expect(S.lowerFirst('ASD')).toEqual('aSD');
   expect(S.lowerFirst('Asd')).toEqual('asd');
 })
+

@@ -192,8 +192,8 @@ export const sortByProp = (arr, attr = 'name', asc = true) => {
   if (!arr) return null;
 
   const compare = (a, b) => {
-    let attrA = lower(removeWhitespace(get(attr, a)));
-    let attrB = lower(removeWhitespace(get(attr, b)));
+    let attrA = lower(removeWhitespace(String(get(attr, a))));
+    let attrB = lower(removeWhitespace(String(get(attr, b))));
     let comparison = 0;
     if (attrA > attrB) comparison=1; else comparison=-1;
     return asc ? comparison : comparison*-1;

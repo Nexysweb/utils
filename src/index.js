@@ -1,15 +1,17 @@
-import * as array from './array.js';
-import * as date from './date.js';
-import * as ds from './ds.js';
-import * as number from './number.js';
-import * as random from './random.js';
-import * as string from './string.js';
-import * as url from './url.js';
-import * as regex from './regex.js';
+import * as array from './array';
+import * as cast from './cast';
+import * as date from './date';
+import * as ds from './ds';
+import * as number from './number';
+import * as random from './random';
+import * as string from './string';
+import * as url from './url';
+import * as regex from './regex';
 import * as color from './color';
 
 const exports = {
   array,
+  cast,
   date,
   ds,
   number,
@@ -21,6 +23,7 @@ const exports = {
 
 export {
   array,
+  cast,
   date,
   ds,
   number,

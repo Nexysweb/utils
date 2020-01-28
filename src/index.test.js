@@ -10,3 +10,7 @@ test('export color', () => {
   expect(typeof IndexExport.color === 'object').toEqual(true)
 })
 
+test('export cast', () => {
+  expect(typeof IndexExport.cast).toEqual('object');
+})
+
