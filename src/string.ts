@@ -164,14 +164,14 @@ export const isUUID = (str:string, version:string = 'all'):Boolean => {
 }
 
 // NOTE: more complete - .lodash.snakeCase()
-export const camelToSnakeCase = (str:String):String => str.replace(/([a-z1-9])\.?(?=[A-Z]+)/g, '$1_').toLowerCase();
+export const camelToSnakeCase = (str:string):string => str.replace(/([a-z1-9])\.?(?=[A-Z]+)/g, '$1_').toLowerCase();
 
-export const snakeToCamelCase = (str:String):String => str.replace(/(\_\w)/g, c => c[1].toUpperCase());
+export const snakeToCamelCase = (str:string):string => str.replace(/(\_\w)/g, c => c[1].toUpperCase());
 
 /**
  * lowers the first char of a string (rest of string remains intact)
  * @param s: input string
  * @return inut string with first char as lower case
  */
-export const lowerFirst = (s:String):String => typeof s === 'string' ? s.charAt(0).toLowerCase() + s.substr(1) : s;
+export const lowerFirst = (s:string):string => typeof s === 'string' ? s.charAt(0).toLowerCase() + s.substr(1) : s;
 
