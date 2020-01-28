@@ -7,7 +7,7 @@ import { sum } from './number';
  * @param  arr: array of interest
  * @return int array
  */
-export const arrayBooleanToInt = arr => {
+export const arrayBooleanToInt = (arr:boolean[]):number[] => {
   return arr.map(a => {
     if (a === true) {
       return 1;
@@ -22,7 +22,7 @@ export const arrayBooleanToInt = arr => {
  * @param  arr: array of boolean
  * @return sum value
  */
-export const sumArrayBoolean = arr => sum(arrayBooleanToInt(arr));
+export const sumArrayBoolean = (arr:boolean[]):number => sum(arrayBooleanToInt(arr));
 
 /**
  * check if object is in array
@@ -30,7 +30,7 @@ export const sumArrayBoolean = arr => sum(arrayBooleanToInt(arr));
  * @param  arr: array of objects
  * @return index if exists otherwise null
  */
-export const isObjectInArray = (k, arr) => {
+export const isObjectInArray = (k:any, arr:Array<any>) => {
   var a = arr.indexOf(k);
 
   if (a === -1) {
