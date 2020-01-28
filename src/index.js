@@ -1,4 +1,5 @@
 import * as array from './array.js';
+import * as cast from './cast';
 import * as date from './date.js';
 import * as ds from './ds.js';
 import * as number from './number.js';
@@ -10,6 +11,7 @@ import * as color from './color';
 
 const exports = {
   array,
+  cast,
   date,
   ds,
   number,
@@ -21,6 +23,7 @@ const exports = {
 
 export {
   array,
+  cast,
   date,
   ds,
   number,
