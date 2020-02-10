@@ -99,7 +99,7 @@ const toFloat = s => {
     return null;
   }
 
-  return Number(s.replace(/[^\d]/g, ''));
+  return Number(s.replace(/[',]/g, ''));
 }
 
 export {formatNumber, formatNumberMini, formatKprice, sum, isNumeric, calcRatio, toFloat};
