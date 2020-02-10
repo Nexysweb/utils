@@ -5,7 +5,7 @@ test('format', () => {
 });
 
 test('format number with delimiters', () => {
-  const v1 = "123'123";
+  const v1 = 123123;
   const e1 = "123'123.00";
 
   const v2 = 123456;

@@ -5,24 +5,22 @@
  * @param delimiter: thousand separator, default " ' "
  * @see http://stackoverflow.com/questions/149055/how-can-i-format-numbers-as-money-in-javascript
  */
-const formatNumber = (v, precision, delimiter = '\'') => {
-  // by default decimal precision is 2
-  if (typeof (precision) === 'undefined') {
-    precision = 2;
-  }
-  let nr = v;
+const formatNumber = (v:number, precision:number = 2, delimiter:string = '\''):string => {
+  //let nr:string = v;
 
-  if (typeof (v) === 'string') {
-    nr = v.replace(delimiter, '');
+  /*if (typeof (v) === 'string') {
+    nr = (v.replace(delimiter, ''));
   }
-  const pf = parseFloat(nr);
+  const pf = parseFloat(nr);*/
+
+  const pf = v;
 
   if (isNaN(pf)) {
     return '';
   }
 
-  var re = (precision > 0) ? /(\d)(?=(\d{3})+\.)/g : /(\d)(?=(\d{3})+$)/g;
-  return parseFloat(nr).toFixed(precision).replace(re, '$1\'');
+  const re = (precision > 0) ? /(\d)(?=(\d{3})+\.)/g : /(\d)(?=(\d{3})+$)/g;
+  return pf.toFixed(precision).replace(re, '$1\'');
 };
 
 /**
@@ -31,13 +29,11 @@ const formatNumber = (v, precision, delimiter = '\'') => {
  * @param precision: precision (default: 2)
  * @return number with given precision
  */
-const formatNumberMini = (v, precision) => {
-  if (typeof (precision) === 'undefined') {
-    precision = 2;
-  }
+const formatNumberMini = (v:number, precision:number = 2):string => {
   if (isNaN(v)) {
     return '';
   }
+
   return Number(v).toFixed(precision);
 };
 
@@ -46,7 +42,7 @@ const formatNumberMini = (v, precision) => {
  * @param v: number
  * @return rounded number separated by commas
  */
-const formatKprice = v => {
+const formatKprice = (v:number):string => {
   if (isNaN(v)) {
     return '';
   }
@@ -58,35 +54,35 @@ const formatKprice = v => {
  * sums array made of numbers
  * @param arr: array of numbers
  */
-const sum = arr => arr.reduce((a, b) => a + b);
-
+const sum = (arr:number[]):number => arr.reduce((a, b) => a + b, 0);
 
 /**
  * check if passed value is numeric
  * @param value: value to check
  * @return true/false
  */
-const isNumeric = value => {
-  return !isNaN(parseFloat(value)) && isFinite(value);
-};
+const isNumeric = (value:any):boolean => !isNaN(parseFloat(value)) && isFinite(value);
 
 /**
 * Calculates the ratio based on two numbers
 * @param a, b: numbers
 * @return calculated value
 */
-const calcRatio = (a, b) => {
-  let r = 100 * a / b;
+const calcRatio = (a:number, b:number):string => {
+  const r = 100 * a / b;
+
+  let t = '';
+
   if (isNaN(r)) {
-    r = '';
+    t = '';
   } else {
-    r = formatNumber(r);
+    t = formatNumber(r);
   }
 
   if (!isFinite(r)) {
-    r = '\u221E';
+    t = '\u221E';
   }
-  return r;
+  return t;
 };
 
 /**
@@ -94,9 +90,9 @@ const calcRatio = (a, b) => {
  * @param  input string
  * @return float
  */
-const toFloat = s => {
+const toFloat = (s:string):number => {
   if (!s || s === null || s === '') {
-    return null;
+    return NaN;
   }
 
   return Number(s.replace(/[',]/g, ''));
