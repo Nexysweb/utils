@@ -40,5 +40,7 @@ test('calcRatio', () => {
 
 test('tofloat', () => {
   expect(toFloat('23.43')).toEqual(23.43);
+  expect(toFloat('1\'234\'567.89')).toEqual(1234567.89);
+  expect(toFloat('1,234,567.89')).toEqual(1234567.89);
 });
 
