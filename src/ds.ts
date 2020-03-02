@@ -4,7 +4,7 @@ import { removeWhitespace } from './string';
  * @see https://codeburst.io/javascript-array-distinct-5edc93501dc4
  * @return only distinct entries in an array 
  */
-export const distinct = arr => [...new Set(arr)];
+export const distinct = (arr:any[]):any[] => [...new Set(arr)];
 
 /**
  * transposes an object in the mathematical terms; i.e. rows become columns and columns become rows.
@@ -13,11 +13,11 @@ export const distinct = arr => [...new Set(arr)];
  * @param  fn  function that maps the value that is transposed to a potential other value. By default returns same value
  * @return transposed object
  */
-export const transpose = (arr, fn = a => a) => {
-  const r = {};
+export const transpose = (arr:any, fn:(a:any) => any = a => a) => {
+  const r:{[k:string]:any} = {};
 
   Object.keys(arr).map(idx => {
-    return Object.keys(arr[idx]).map(d => {
+    return Object.keys(arr[idx]).map((d:string) => {
       if (!r[d]) {
         r[d] = {};
       }
@@ -37,8 +37,8 @@ export const transpose = (arr, fn = a => a) => {
  * @param key - the attribute to group by
  * @return array of groups
  */
-export const groupBy = function(arr, key) {
-  const callback = function(acc, v) {
+export const groupBy = (arr:any[], key:any):{[k:string]:any[]} => {
+  const callback = function(acc:any, v:any) {
     (acc[get(key, v)] = acc[get(key, v)] || []).push(v);
     return acc;
   }
@@ -47,7 +47,7 @@ export const groupBy = function(arr, key) {
   return grouped; 
 };
 
-export const unique = function(arr, prop) {
+export const unique = (arr:any[], prop:any):any => {
   const temp = arr.map(obj => {
     return prop ? get(prop, obj) : obj 
   });
@@ -59,7 +59,7 @@ export const unique = function(arr, prop) {
  * @param k1=v1,k2=v2, ...
  * @return { k1: v1, k2: v2 .. }
  */
-export const deserialize = str => str.split(',').reduce((r, item) => {
+export const deserialize = (str:string):{[k:string]:string} => str.split(',').reduce((r, item) => {
   const arr = item.split('=');
 
   if (arr.length === 2) {
@@ -71,17 +71,17 @@ export const deserialize = str => str.split(',').reduce((r, item) => {
   return r;
 }, {});
 
-export const keepProps = (obj, props) => {
+export const keepProps = (obj:any, props:any):any => {
   if (!props || !Array.isArray(props)) return obj;
 
   return Object.entries(obj)
     .reduce((acc, [key, value]) => props.includes(key) ? ({...acc, [key]: value}) : acc, {});
 }   
 
-export const removeProp = (obj, prop) => Object.keys(obj)
+export const removeProp = (obj:any, prop:any):any => Object.keys(obj)
   .reduce((acc, key) => key !== prop ? ({...acc, [key]: obj[key]}) : acc, {});
 
-export const removeProps = (obj, props) => {
+export const removeProps = (obj:any, props:any):any => {
   while (props.length > 0) {
     obj = removeProp(obj, props.pop());
   }
@@ -94,8 +94,8 @@ export const removeProps = (obj, props) => {
  * @param  o : object
  * @return o[p] respectively o[p1][p2]...
  */
-export const get = function(p, o) { 
-  return p.split(".").reduce((xs, x) => {
+export const get = (p:any, o:any):any => { 
+  return p.split(".").reduce((xs:any, x:any) => {
     if (xs && (xs[x] || xs[x] === 0 || xs[x] === false)) return xs[x];
     else return null;
   }, o);
@@ -108,7 +108,7 @@ export const get = function(p, o) {
  * @param  obj : object
  * @return o[p] respectively o[p1][p2]...
  */
-export const set = (name, value, obj) => {
+export const set = (name:string, value:any, obj:any) => {
   // update state with new values
   const keyArray = name.split('.');
 
@@ -139,14 +139,14 @@ export const set = (name, value, obj) => {
  * @param  newObj: new field that was updated
  * @return updated form
  */
-export const updateObject = (form, newObj) => set(newObj.name, newObj.value, form);
+export const updateObject = (form:any, newObj:any):any => set(newObj.name, newObj.value, form);
 
 /**
  * checks if object is empty
  * @param  {[type]} obj [description]
  * @return {[type]}     [description]
  */
-export const isEmpty = obj => {
+export const isEmpty = (obj:any):boolean => {
   if (Array.isArray(obj)) return false;
   if (!obj) return true;
   for (let key in obj) if(obj.hasOwnProperty(key)) return false;
@@ -159,18 +159,18 @@ export const isEmpty = obj => {
  * @param  prop: prop of interest
  * @return boolean
  */
-export const hasProp = (o, prop) => !isEmpty(o) && prop && (prop in o);
+export const hasProp = (o:any, prop:any):boolean => !isEmpty(o) && prop && (prop in o);
 
 /**
  * removes prefix for all keys
  */
-export const removePrefix = (obj, prefix) => {
+export const removePrefix = (obj:any, prefix:string):any => {
   if (obj.data) return obj.data;
   return Object.keys(obj).reduce((a, key) => ({...a, [key.replace(prefix, "")]: obj[key] }), {});
 }
 
 // needed for sort by prop
-export const lower = value => {
+export const lower = (value:any):string | number => {
   if (typeof value === 'number') return value;
   
   if(value && value.length > 0) {
@@ -188,10 +188,10 @@ export const lower = value => {
    * @param asc: if true - sort ascending, false - descending
    * @return sorted array by attribute
    */
-export const sortByProp = (arr, attr = 'name', asc = true) => {
+export const sortByProp = (arr:any[], attr:string = 'name', asc:boolean = true):any[] | null => {
   if (!arr) return null;
 
-  const compare = (a, b) => {
+  const compare = (a:any, b:any):number => {
     let attrA = lower(removeWhitespace(String(get(attr, a))));
     let attrB = lower(removeWhitespace(String(get(attr, b))));
     let comparison = 0;
@@ -209,7 +209,7 @@ export const sortByProp = (arr, attr = 'name', asc = true) => {
  * @param attr: object property that is used for comparison
  * @return {1, 0, -1}
 */
-export const compareObj = (a, b, attr) => {
+export const compareObj = (a:any, b:any, attr:string):number => {
   let valueA = get(attr, a);
   let valueB = get(attr, b);
 
@@ -236,12 +236,11 @@ export const compareObj = (a, b, attr) => {
  * @param  {Boolean} isNotNull: conditions that make the new record not null and hence to be added =
  * @return list of [edit, duplicate, add, warning] rows
  */
-export const compareWithArray = (newRecord, oldRecords, isRecordFound, isDuplicate = x => false, isNotNull = x => true) => {
+export const compareWithArray = (newRecord:any, oldRecords:any[], isRecordFound: (a:any, b:any) => boolean, isDuplicate:(a:any, b:any) => boolean = x => false, isNotNull:(a:any) => boolean = x => true) => {
   // check if figure already exists in db
   const recordFound = oldRecords.find(x => isRecordFound(newRecord, x));
 
   if (recordFound) {
-    console.log('here')
     // remove entry from array to increase search speed for subsequent entries
     //delete(oldRecords.indexOf(recordFound));
     // check if value is the same, if not, need to edit
@@ -266,16 +265,16 @@ export const compareWithArray = (newRecord, oldRecords, isRecordFound, isDuplica
 }
 
 // NOTE: https://github.com/hapijs/joi/issues/2215
-export const isJoi = schema => schema.hasOwnProperty('$_root') || schema.hasOwnProperty('$_super');
+export const isJoi = (schema:any):boolean => schema.hasOwnProperty('$_root') || schema.hasOwnProperty('$_super');
 
-export const isObject = item => {
+export const isObject = (item:any):boolean => {
   if (!item) return false;
 
   if (isJoi(item)) return false;
   else return typeof item === 'object' && !Array.isArray(item) && item !== null;
 }
 
-export const deepMerge = (target, source) => {
+export const deepMerge = (target:any, source:any):any => {
   if (isObject(target) && isObject(source)) {
     Object.entries(source).forEach(([key, sourceValue]) => {
       if (isObject(sourceValue)) {
@@ -294,7 +293,7 @@ export const deepMerge = (target, source) => {
   return target;
 }
 
-export const nest = (data, props=[]) => {
+export const nest = (data:any = null, props:any=[]) => {
   if (data === undefined || data === null) return null;
 
   if (props.length === 0) {
@@ -330,8 +329,9 @@ export const nest = (data, props=[]) => {
  * Takes a json object and flattens it
  * {'a': {'b': 'c'}, 'd': 'e'} -> [{key: 'a.b', value: 'c'}, {key: 'd', value: 'e'}]
 **/
-export const linearize = (obj, keys=[]) => {
-  let list = [];
+export const linearize = (obj:any, keys=[]) => {
+  let list:{[k:string]:any}[] = [];
+
   Object.entries(obj).map(([key, value]) => {
     const next = [...keys, key];
     if (isObject(value)) {
@@ -350,7 +350,7 @@ export const linearize = (obj, keys=[]) => {
  * @param   o : input object
  * @return ['key1', 'key2', ...]
  */
-export const getLinearizedKeys = o => {
+export const getLinearizedKeys = (o:any):any => {
   return Object.keys(o).map(key => {
     let value = o[key];
     if (value != null && typeof value == 'object') {

@@ -3,7 +3,7 @@
  * @param len: length of generated strings
  * @return random generated strings
  */
-export const generateString = (len = 21) => {
+export const generateString = (len:number = 21):string => {
   let text = '';
   const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 

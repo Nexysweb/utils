@@ -5,8 +5,7 @@
  * @param z: padding character (default: 0)
  * @return padded string
  */
-export const padding = (m:number, width:number, z:string):string => {
-  z = z || '0';
+export const padding = (m:number, width:number, z:string = '0'):string => {
   const n = String(m);
   return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
 };
