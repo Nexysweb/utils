@@ -8,7 +8,6 @@
   },
   "scripts": {
     "test": "rimraf dist/ && jest ",
-    "builddep": "rimraf dist/ && babel src/ --out-dir dist/ --extensions \".js,.ts\";rm dist/*.test.js",
     "build": "tsc --allowSyntheticDefaultImports --target esnext --outDir dist/"
   },
   "files": [
