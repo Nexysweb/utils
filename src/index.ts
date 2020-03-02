@@ -9,7 +9,7 @@ import * as url from './url';
 import * as regex from './regex';
 import * as color from './color';
 
-const exports = {
+const exportModules = {
   array,
   cast,
   date,
@@ -34,4 +34,4 @@ export {
   color
 };
 
-export default exports;
+export default exportModules;

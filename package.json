@@ -2,13 +2,14 @@
   "name": "@nexys/utils",
   "version": "3.7.6",
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "dependencies": {
     "@babel/runtime": "^7.5.5"
   },
   "scripts": {
     "test": "rimraf dist/ && jest ",
-    "build": "rimraf dist/ && babel src/ --out-dir dist/ --extensions \".js,.ts\";rm dist/*.test.js",
-    "buildTs": "tsc --allowSyntheticDefaultImports --target esnext --outDir dist/"
+    "builddep": "rimraf dist/ && babel src/ --out-dir dist/ --extensions \".js,.ts\";rm dist/*.test.js",
+    "build": "tsc --allowSyntheticDefaultImports --target esnext --outDir dist/"
   },
   "files": [
     "dist/*"

@@ -293,7 +293,7 @@ export const deepMerge = (target:any, source:any):any => {
   return target;
 }
 
-export const nest = (data:any = null, props:any=[]) => {
+export const nest = (data:any = null, props:any=[]):any => {
   if (data === undefined || data === null) return null;
 
   if (props.length === 0) {
@@ -306,7 +306,7 @@ export const nest = (data:any = null, props:any=[]) => {
     if (data.length === 0) return {};
 
     let nested = {};
-    data.forEach(({key, value}) => {
+    data.forEach(({key, value}:{key:any, value:any}) => {
       const props = key.split('.');
       const obj = nest(value, props);
       nested = deepMerge(nested, obj);
@@ -329,7 +329,7 @@ export const nest = (data:any = null, props:any=[]) => {
  * Takes a json object and flattens it
  * {'a': {'b': 'c'}, 'd': 'e'} -> [{key: 'a.b', value: 'c'}, {key: 'd', value: 'e'}]
 **/
-export const linearize = (obj:any, keys=[]) => {
+export const linearize = (obj:any, keys:any[]=[]) => {
   let list:{[k:string]:any}[] = [];
 
   Object.entries(obj).map(([key, value]) => {
@@ -350,7 +350,7 @@ export const linearize = (obj:any, keys=[]) => {
  * @param   o : input object
  * @return ['key1', 'key2', ...]
  */
-export const getLinearizedKeys = (o:any):any => {
+export const getLinearizedKeys = (o:any):any[] => {
   return Object.keys(o).map(key => {
     let value = o[key];
     if (value != null && typeof value == 'object') {

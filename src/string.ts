@@ -150,7 +150,7 @@ export const isEmail = (email:string):boolean => {
  *
  * taken from: https://github.com/validatorjs/validator.js/blob/master/src/lib/isUUID.js
  */
-export const isUUID = (str:string, version:string = 'all'):Boolean => {
+export const isUUID = (str:string, version:3 | 4 | 5 | 'all' = 'all'):Boolean => {
   const patterns = {
     3: /^[0-9A-F]{8}-[0-9A-F]{4}-3[0-9A-F]{3}-[0-9A-F]{4}-[0-9A-F]{12}$/i,
     4: /^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i,

@@ -14,7 +14,7 @@ export const getGoogleMapsAddressLink = (p:{ street:any, zip:any, city:any, coun
  * @param  e.g. {p1: a1, p2: a2, ...}
  * @return p1=a1&p2=a2&...
  */
-export const paramsToString = (params:{[k:string]:string}):string => Object.keys(params).map(key => key + '=' + encodeURIComponent(params[key])).join('&');
+export const paramsToString = (params:{[k:string]:any}):string => Object.keys(params).map(key => key + '=' + encodeURIComponent(params[key])).join('&');
 
 /**
  * @param k1=v1,k2=v2, ...
@@ -36,12 +36,12 @@ export const deserialize = (str:string):{[k:string]:string} => str.split(',').re
  * @param  obj: object containing the value of the params
  * @return url with substituted values
  */
-export const replaceParams = (uri:string, params, curly=false) => {
+export const replaceParams = (uri:string, params:{[k:string]:any}, curly:boolean=false) => {
   if (!params || !(typeof params === 'object')) {
     return uri;
   }
 
-  Object.entries(params).forEach(([key, value]) => {
+  Object.entries(params).map(([key, value]:[string, any]) => {
     if (curly) {
       const regex = new RegExp(`\\$\\{${key}\\}`, 'g');
       uri = uri.replace(regex, value);
@@ -93,8 +93,9 @@ export const getQueryStringParams = (query:string) => {
 
   return (/^[?#]/.test(query) ? query.slice(1) : query)
     .split('&')
-    .reduce((params, param) => {
-      const [key, value] = param.split('=');
+    .reduce((params:{[k:string]:any}, param:any) => {
+      const arrSplit:string[] = param.split('=');
+      const [key, value] = arrSplit;
       params[key] = value ? decodeURIComponent(value.replace(/\+/g, ' ')) : '';
       return params;
     }, {});
