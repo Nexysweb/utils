@@ -359,3 +359,17 @@ export const getLinearizedKeys = (o:any):any[] => {
     } else return key;
   }).flat();
 }
+
+export const cleanObject = (obj:any, removeNull=true):any => {
+  for (const propName in obj) { 
+    if (removeNull && obj[propName] === null) {
+      delete obj[propName];
+    } else if (obj[propName] === undefined) {
+      delete obj[propName];
+    } else {
+      if (typeof obj[propName] === 'object' && obj[propName] !== null) {
+        cleanObject(obj[propName]);
+      }
+    }
+  }
+}

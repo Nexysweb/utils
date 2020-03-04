@@ -361,3 +361,39 @@ test('getLinearizedKeys', () => {
 
   expect(DSUtils.getLinearizedKeys(obj)).toEqual(out);
 });
+
+describe('clean object', () => {
+  test('with null', () => {
+    const obj = {
+      test: {
+        test: 'test',
+        test2: undefined,
+        test3: null
+      },
+      test: 'test',
+      test2: undefined,
+      test3: null
+    };
+
+    DSUtils.cleanObject(obj);
+
+    expect(obj).toEqual({ test: { test: 'test' }, test: 'test' });
+  });
+
+  test('without null', () => {
+    const obj = {
+      test: {
+        test: 'test',
+        test2: undefined,
+        test3: null
+      },
+      test: 'test',
+      test2: undefined,
+      test3: null
+    };
+
+    DSUtils.cleanObject(obj, false);
+
+    expect(obj).toEqual({ test: { test: 'test', test3: null }, test: 'test', test3: null });
+  });
+});
