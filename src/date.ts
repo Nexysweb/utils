@@ -155,13 +155,18 @@ export const countDaysDiffBtnDates = (d1:Date, d2:Date):number => {
  * @param d date  to convert
  * @return ISO date
  */
-export const dateToISO = (d:Date | string):string => {
-  if (typeof (d as Date).toISOString === 'function') {
+export const dateToISO = (d:Date | string | undefined):string => {
+  
+  if (d instanceof Date && typeof (d as Date).toISOString === 'function') {
     return (<Date>d).toISOString();
   }
 
-  const s = d.toString();
-  return new Date(s).toISOString(); 
+  if (typeof d === 'string') {
+    const s = d.toString();
+    return new Date(s).toISOString(); 
+  }
+
+  return '';
 };
 
 export const monthNames:string[] = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Seq', 'Oct', 'Nov', 'Dec'];
