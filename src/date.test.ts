@@ -90,6 +90,8 @@ test('dateToISO', () => {
   const date1 = new Date(isoStringTruncated);
   const date2 = new Date(isoString)
   expect(dateToISO(date1)).toEqual(dateToISO(date2));
+
+  expect(dateToISO(isoString)).toEqual(isoString)
 });
 
 test('month names', () => {

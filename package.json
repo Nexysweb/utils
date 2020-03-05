@@ -1,10 +1,6 @@
 {
   "name": "@nexys/utils",
-<<<<<<< HEAD
   "version": "3.7.8",
-=======
-  "version": "3.7.7",
->>>>>>> 87d2feb726cc77aa0f9c9e895f28ff39087f495b
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "dependencies": {
