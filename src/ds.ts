@@ -37,17 +37,18 @@ export const transpose = (arr:any, fn:(a:any) => any = a => a) => {
  * @param key - the attribute to group by
  * @return array of groups
  */
-export const groupBy = (arr:any[], key:any):{[k:string]:any[]} => {
-  const callback = function(acc:any, v:any) {
+export const groupBy = <A>(arr:A[], key:string):{[k:string]:A[]} => {
+  const callback = (acc:{[k:string]:A[]}, v:A) => {
     (acc[get(key, v)] = acc[get(key, v)] || []).push(v);
     return acc;
   }
 
-  const grouped = arr.reduce(callback, {});
-  return grouped; 
+  const r:{[k:string]:A[]} = {}
+
+  return arr.reduce(callback, r);
 };
 
-export const unique = (arr:any[], prop:any):any => {
+export const unique = <A>(arr:A[], prop:any):A[] => {
   const temp = arr.map(obj => {
     return prop ? get(prop, obj) : obj 
   });
@@ -94,7 +95,7 @@ export const removeProps = (obj:any, props:any):any => {
  * @param  o : object
  * @return o[p] respectively o[p1][p2]...
  */
-export const get = (p:any, o:any):any => { 
+export const get = (p:string, o:Object):any => { 
   return p.split(".").reduce((xs:any, x:any) => {
     if (xs && (xs[x] || xs[x] === 0 || xs[x] === false)) return xs[x];
     else return null;
@@ -108,9 +109,9 @@ export const get = (p:any, o:any):any => {
  * @param  obj : object
  * @return o[p] respectively o[p1][p2]...
  */
-export const set = (name:string, value:any, obj:any) => {
+export const set = (name:string, value:any, obj:any):Object => {
   // update state with new values
-  const keyArray = name.split('.');
+  const keyArray:string[] = name.split('.');
 
   // depth of the value
   const l = keyArray.length;
@@ -368,7 +369,7 @@ export const cleanObject = (obj:any, removeNull=true):any => {
       delete obj[propName];
     } else {
       if (typeof obj[propName] === 'object' && obj[propName] !== null) {
-        cleanObject(obj[propName]);
+        cleanObject(obj[propName], removeNull);
       }
     }
   }
