@@ -8,7 +8,7 @@
   },
   "scripts": {
     "test": "rimraf dist/ && jest ",
-    "build": "tsc --allowSyntheticDefaultImports --target esnext --outDir dist/"
+    "build": "tsc"
   },
   "files": [
     "dist/*"
