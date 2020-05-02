@@ -17,7 +17,3 @@ console.log(Utils)
 import * as Utils from '@nexys/utils';
 console.log(Utils)
 ```
-
-## Documentation
-
-use https://github.com/jsdoc/jsdoc?
