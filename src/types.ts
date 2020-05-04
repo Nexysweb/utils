@@ -3,10 +3,12 @@ export type Uuid = string;
 
 export interface OptionSet {
   id: Id,
-  name: string
+  name: string,
+  description?: string
 }
 
 export interface UOptionSet {
   uuid: Uuid,
-  name: string
+  name: string,
+  description?: string
 }
