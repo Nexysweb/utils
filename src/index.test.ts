@@ -14,6 +14,10 @@ test('export cast', () => {
   expect(typeof IndexExport.cast).toEqual('object');
 })
 
+test('export curl', () => {
+  expect(typeof IndexExport.curl).toEqual('object');
+})
+
 test('export types', () => {
   expect(typeof IndexExport.types).toEqual('object');
 })

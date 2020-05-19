@@ -1,5 +1,6 @@
 import * as array from './array';
 import * as cast from './cast';
+import * as curl from './curl';
 import * as date from './date';
 import * as ds from './ds';
 import * as number from './number';
@@ -13,6 +14,7 @@ import * as types from './types';
 const exportModules = {
   array,
   cast,
+  curl,
   date,
   ds,
   number,
@@ -20,12 +22,13 @@ const exportModules = {
   string,
   url,
   regex,
-  types
+  types,
 };
 
 export {
   array,
   cast,
+  curl,
   date,
   ds,
   number,
