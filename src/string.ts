@@ -5,8 +5,7 @@
  * @param z: padding character (default: 0)
  * @return padded string
  */
-export const padding = (m:number, width:number, z:string):string => {
-  z = z || '0';
+export const padding = (m:number, width:number, z:string = '0'):string => {
   const n = String(m);
   return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
 };
@@ -151,7 +150,7 @@ export const isEmail = (email:string):boolean => {
  *
  * taken from: https://github.com/validatorjs/validator.js/blob/master/src/lib/isUUID.js
  */
-export const isUUID = (str:string, version:string = 'all'):Boolean => {
+export const isUUID = (str:string, version:3 | 4 | 5 | 'all' = 'all'):Boolean => {
   const patterns = {
     3: /^[0-9A-F]{8}-[0-9A-F]{4}-3[0-9A-F]{3}-[0-9A-F]{4}-[0-9A-F]{12}$/i,
     4: /^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i,
