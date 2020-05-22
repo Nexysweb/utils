@@ -9,11 +9,8 @@ import * as string from './string';
 import * as url from './url';
 import * as regex from './regex';
 import * as color from './color';
-<<<<<<< HEAD:src/index.js
 import * as promise from './promise';
-=======
 import * as types from './types';
->>>>>>> 10031b84a7911e063143cb099040dfd49fd577fa:src/index.ts
 
 const exportModules = {
   array,
