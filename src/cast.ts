@@ -1,5 +1,5 @@
 // cast different types to another type
-export const toDecimal = (s:string):Number => {
+export const toDecimal = (s:string):Number | null => {
   const r = parseFloat(s); // better to use Number?
 
   if (isNaN(r)) {
@@ -9,7 +9,7 @@ export const toDecimal = (s:string):Number => {
   return r;
 };
 
-export const toInt = (s:string):Number => {
+export const toInt = (s:string):Number | null => {
   try {
     return parseInt(s);
   } catch (err) {
@@ -17,10 +17,10 @@ export const toInt = (s:string):Number => {
   }
 };
 
-export const toDate = (s:string):Date => {
+export const toDate = (s:string):Date | null => {
   try {
     return new Date(s);
-  } catch {
+  } catch (err) {
     return null;
   }
 };

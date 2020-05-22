@@ -18,3 +18,11 @@ test('export promise', () => {
   expect(typeof IndexExport.promise).toEqual('object');
 })
 
+test('export curl', () => {
+  expect(typeof IndexExport.curl).toEqual('object');
+})
+
+test('export types', () => {
+  expect(typeof IndexExport.types).toEqual('object');
+})
+

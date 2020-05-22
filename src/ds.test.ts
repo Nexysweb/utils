@@ -53,6 +53,30 @@ test('group by', () => {
   expect(DSUtils.groupBy(value, 'a')).toEqual(e); 
 });
 
+test('group by with type', () => {
+  const value:{a: string, v: number}[] = [
+    {a: 'first', v: 4},
+    {a: 'first', v: 2},
+    {a: 'second', v: 1},
+    {a: 'second', v: 5}
+  ];
+
+  const e:{[k:string]:{a: string, v: number}[]} = {
+    'first': [
+      {a: 'first', v: 4},
+      {a: 'first', v: 2}
+    ],
+    'second': [
+      {a: 'second', v: 1},
+      {a: 'second', v: 5}
+    ]
+  };
+
+  const r:{[k:string]:{a: string, v: number}[]} = DSUtils.groupBy(value, 'a')
+
+  expect(r).toEqual(e); 
+});
+
 test('deserialize', () => {
   const value = 'k1=v1,k2=v2';
   const e = { 'k2': 'v2', 'k1': 'v1'};
@@ -72,7 +96,7 @@ test('unique', () => {
     {ModuleId: 3}
   ];
 
-  const r = DSUtils.sortByProp(rows, 'ModuleId');
+  const r = DSUtils.sortByProp(rows, 'ModuleId') as any[];
   expect(DSUtils.unique(r, 'ModuleId')).toEqual([{ModuleId: 1}, {ModuleId: 2}, {ModuleId: 3}]);
 });
 
@@ -92,12 +116,12 @@ test('get - return null', () => {
 
 test('get - prop 0 / false', () => {
   const p = 'test';
-  let data = {test: 0};
+  const data = {test: 0};
 
   expect(DSUtils.get(p, data)).toEqual(0);
 
-  data = {test: false};
-  expect(DSUtils.get(p, data)).toEqual(false);
+  const data2 = {test: false};
+  expect(DSUtils.get(p, data2)).toEqual(false);
 });
 
 test('keep props', () => {
@@ -360,4 +384,40 @@ test('getLinearizedKeys', () => {
   const out = ['k1', 'k2.k21', 'k2.k22', 'k3'];
 
   expect(DSUtils.getLinearizedKeys(obj)).toEqual(out);
+});
+
+describe('clean object', () => {
+  test('with null', () => {
+    const obj = {
+      test: {
+        test: 'test',
+        test2: undefined,
+        test3: null
+      },
+      test4: 'test',
+      test2: undefined,
+      test3: null
+    };
+
+    DSUtils.cleanObject(obj);
+
+    expect(obj).toEqual({ test: { test: 'test' }, test4: 'test' });
+  });
+
+  test('without null', () => {
+    const obj = {
+      test: {
+        test: 'test',
+        test2: undefined,
+        test3: null
+      },
+      test4: 'test',
+      test2: undefined,
+      test3: null
+    };
+
+    DSUtils.cleanObject(obj, false);
+
+    expect(obj).toEqual({ test: { test: 'test', test3: null }, test4: 'test', test3: null });
+  });
 });

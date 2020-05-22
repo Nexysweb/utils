@@ -3,8 +3,8 @@
  * @param object with  street, zip, city, country
  * @return link
  */
-export const getGoogleMapsAddressLink = ({ street, zip, city, country }) => {
-  const urlAddress = encodeURIComponent(street + ' ' + zip + ' ' + city + ' ' + country.name);
+export const getGoogleMapsAddressLink = (p:{ street:any, zip:any, city:any, country:{id:number, name: string} }) => {
+  const urlAddress = encodeURIComponent(p.street + ' ' + p.zip + ' ' + p.city + ' ' + p.country.name);
   const url = 'https://www.google.com/maps/?q=' + urlAddress;
   return url;
 }
@@ -14,13 +14,13 @@ export const getGoogleMapsAddressLink = ({ street, zip, city, country }) => {
  * @param  e.g. {p1: a1, p2: a2, ...}
  * @return p1=a1&p2=a2&...
  */
-export const paramsToString = params => Object.keys(params).map(key => key + '=' + encodeURIComponent(params[key])).join('&');
+export const paramsToString = (params:{[k:string]:any}):string => Object.keys(params).map(key => key + '=' + encodeURIComponent(params[key])).join('&');
 
 /**
  * @param k1=v1,k2=v2, ...
  * @return { k1: v1, k2: v2 .. }
  */
-export const deserialize = str => str.split(',').reduce((r, item) => {
+export const deserialize = (str:string):{[k:string]:string} => str.split(',').reduce((r, item) => {
   const arr = item.split('=');
 
   if (arr.length === 2) {
@@ -36,12 +36,12 @@ export const deserialize = str => str.split(',').reduce((r, item) => {
  * @param  obj: object containing the value of the params
  * @return url with substituted values
  */
-export const replaceParams = (uri, params, curly=false) => {
+export const replaceParams = (uri:string, params:{[k:string]:any}, curly:boolean=false) => {
   if (!params || !(typeof params === 'object')) {
     return uri;
   }
 
-  Object.entries(params).forEach(([key, value]) => {
+  Object.entries(params).map(([key, value]:[string, any]) => {
     if (curly) {
       const regex = new RegExp(`\\$\\{${key}\\}`, 'g');
       uri = uri.replace(regex, value);
@@ -59,7 +59,7 @@ export const replaceParams = (uri, params, curly=false) => {
  * @param  path
  * @return full url
  */
-export const resolve = (hostIn, pathIn) => {
+export const resolve = (hostIn:string, pathIn:string):string | null => {
   // match host until trailing slash
   const re = /^(.*)\/[^\/]*$/;
   const hostMatch = hostIn.match(re);
@@ -86,15 +86,16 @@ export const resolve = (hostIn, pathIn) => {
  * @param  query string, can be obtained using: window.location.search
  * @return params object
  */
-export const getQueryStringParams = query => {
+export const getQueryStringParams = (query:string) => {
   if (!query) {
     return {};
   }
 
   return (/^[?#]/.test(query) ? query.slice(1) : query)
     .split('&')
-    .reduce((params, param) => {
-      const [key, value] = param.split('=');
+    .reduce((params:{[k:string]:any}, param:any) => {
+      const arrSplit:string[] = param.split('=');
+      const [key, value] = arrSplit;
       params[key] = value ? decodeURIComponent(value.replace(/\+/g, ' ')) : '';
       return params;
     }, {});
@@ -105,8 +106,6 @@ export const getQueryStringParams = query => {
  * To be more stringent in adhering to RFC 3986 (which reserves !, ', (, ), and *), even though these characters have no formalized URI delimiting uses, the following can be safely used:
  * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/encodeURIComponent
  */
-export const fixedEncodeURIComponent =  str => {
-  return encodeURIComponent(str).replace(/[!'()*]/g, c => {
-    return '%' + c.charCodeAt(0).toString(16);
-  })
-}
+export const fixedEncodeURIComponent =  (str:string) => encodeURIComponent(str).replace(/[!'()*]/g, c => {
+  return '%' + c.charCodeAt(0).toString(16);
+});

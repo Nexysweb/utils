@@ -1,18 +1,22 @@
 {
   "name": "@nexys/utils",
-  "version": "3.7.4",
-  "main": "dist/index.js",
-  "dependencies": {
-    "@babel/runtime": "^7.5.5"
-  },
+  "version": "3.8.4",
   "scripts": {
     "test": "rimraf dist/ && jest ",
-    "build": "rimraf dist/ && babel src/ --out-dir dist/ --extensions \".js,.ts\";rm dist/*.test.js",
-    "buildTs": "tsc --init --declaration --allowSyntheticDefaultImports --target esnext --outDir dist/"
+    "build": "tsc"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Nexysweb/utils"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "files": [
     "dist/*"
   ],
+  "dependencies": {
+    "@babel/runtime": "^7.5.5"
+  },
   "devDependencies": {
     "@nexys/babelsetup": "^1.0.3"
   }

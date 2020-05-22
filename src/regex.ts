@@ -1,11 +1,11 @@
-const isValid = (regex, str) => {
+const isValid = (regex:string, str:string):boolean => {
   const re = new RegExp(regex, 'g');
   const t = str.match(re);
 
   return Array.isArray(t);
 }
 
-const getMatches = (regex, str, {flags='g', depth=0} = {}) => {
+const getMatches = (regex:string, str:string, {flags='g', depth=0} = {}) => {
   const re = new RegExp(regex, flags); 
 
   // TODO: utils.match(str, regexp, options='g')
