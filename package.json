@@ -1,6 +1,6 @@
 {
   "name": "@nexys/utils",
-  "version": "3.8.4",
+  "version": "3.8.5",
   "scripts": {
     "test": "rimraf dist/ && jest ",
     "build": "tsc"
