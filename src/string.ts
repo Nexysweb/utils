@@ -162,6 +162,8 @@ export const isUUID = (str:string, version:3 | 4 | 5 | 'all' = 'all'):Boolean =>
   return pattern && pattern.test(str);
 }
 
+export const strToSnakeCase = (str: string):string => str.trim().replace(/[^A-Za-z0-9]+/g, '_').toLowerCase();
+
 // NOTE: more complete - .lodash.snakeCase()
 export const camelToSnakeCase = (str:string):string => str.replace(/([a-z1-9])\.?(?=[A-Z]+)/g, '$1_').toLowerCase();
 

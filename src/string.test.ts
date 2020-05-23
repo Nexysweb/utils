@@ -95,6 +95,10 @@ test('isUUID', () => {
   expect(S.isUUID('0362c242-c7c6-403c-a1ac-58f7e8522527')).toEqual(true);
 });
 
+test('strToSnakeCase', () => {
+  expect(S.strToSnakeCase('a random: String  ')).toEqual('a_random_string')
+})
+
 test('camelToSnakeCase', () => {
   expect(S.camelToSnakeCase('isCamelCase')).toEqual('is_camel_case');
 });
