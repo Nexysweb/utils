@@ -1,14 +1,14 @@
 // resources for array
 // https://medium.com/@alvaro.saburido/set-theory-for-arrays-in-es6-eb2f20a61848
-import { sum } from './number';
+import { sum } from "./number";
 
 /**
  * turn an array of {true/false} into {1,0}
  * @param  arr: array of interest
  * @return int array
  */
-export const arrayBooleanToInt = (arr:boolean[]):number[] => {
-  return arr.map(a => {
+export const arrayBooleanToInt = (arr: boolean[]): number[] => {
+  return arr.map((a) => {
     if (a === true) {
       return 1;
     }
@@ -22,7 +22,8 @@ export const arrayBooleanToInt = (arr:boolean[]):number[] => {
  * @param  arr: array of boolean
  * @return sum value
  */
-export const sumArrayBoolean = (arr:boolean[]):number => sum(arrayBooleanToInt(arr));
+export const sumArrayBoolean = (arr: boolean[]): number =>
+  sum(arrayBooleanToInt(arr));
 
 /**
  * check if object is in array
@@ -30,7 +31,7 @@ export const sumArrayBoolean = (arr:boolean[]):number => sum(arrayBooleanToInt(a
  * @param  arr: array of objects
  * @return index if exists otherwise null
  */
-export const isObjectInArray = (k:any, arr:Array<any>) => {
+export const isObjectInArray = (k: any, arr: Array<any>) => {
   var a = arr.indexOf(k);
 
   if (a === -1) {
@@ -47,7 +48,11 @@ export const isObjectInArray = (k:any, arr:Array<any>) => {
  * @param  attr: attribute of integer, default, "id"
  * @return index if exists otherwise null
  */
-export const isObjectAttrInArray = (k:any, arr:any[], attr:string = 'id'):number | null => {
+export const isObjectAttrInArray = (
+  k: any,
+  arr: any[],
+  attr: string = "id"
+): number | null => {
   let idx = null;
 
   arr.filter(function (d, i) {
@@ -70,7 +75,12 @@ export const isObjectAttrInArray = (k:any, arr:any[], attr:string = 'id'):number
  * @param  attr: attribute of integer, default, "id"
  * @return index if exists otherwise null
  */
-export const isNestedObjectAttrInArray = (k:any, arr:any[], nest:any, attr:string = 'id') => {
+export const isNestedObjectAttrInArray = (
+  k: any,
+  arr: any[],
+  nest: any,
+  attr: string = "id"
+) => {
   let idx = null;
 
   arr.filter(function (d, i) {
@@ -92,18 +102,23 @@ export const isNestedObjectAttrInArray = (k:any, arr:any[], nest:any, attr:strin
  * @param idx: begin number, default 1
  * @return array of consecutive number of size n, e.g. [1,2,3,4,5]
  */
-export const createArrayOfLength = (n:number, idx:number = 1):number[] => Array.from({length: n}, (v, k) => k + idx);
+export const createArrayOfLength = (n: number, idx: number = 1): number[] =>
+  Array.from({ length: n }, (v, k) => k + idx);
 
 /**
  * flatten passed multy-dimensional array
  * @param arr: multy-dimensional array
  * @return flatten array
  */
-export const flattenArray = (arr:any[]):any[] => [].concat.apply([], arr);
+export const flattenArray = (arr: any[]): any[] => [].concat.apply([], arr);
 
 // start comparison helper
-export const compareArrayEntriesDepth = (a:any, b:any, attr:string):number => {
-  const s = attr.split('.');
+export const compareArrayEntriesDepth = (
+  a: any,
+  b: any,
+  attr: string
+): number => {
+  const s = attr.split(".");
 
   let ca = a[attr];
   let cb = b[attr];
@@ -126,9 +141,13 @@ export const compareArrayEntriesDepth = (a:any, b:any, attr:string):number => {
   return compareArrayEntries(ca, cb);
 };
 
-export const compareArrayEntriesWAttr = (a:any, b:any, attr:string):number => compareArrayEntries(a[attr], b[attr]);
+export const compareArrayEntriesWAttr = (
+  a: any,
+  b: any,
+  attr: string
+): number => compareArrayEntries(a[attr], b[attr]);
 
-export const compareArrayEntries = (a:any, b:any): number => {
+export const compareArrayEntries = (a: any, b: any): number => {
   if (a < b) {
     return -1;
   }
@@ -150,7 +169,12 @@ export const compareArrayEntries = (a:any, b:any): number => {
  * @param compareFn: function used to compare objects
  * @return sorted array by attribute
  */
-export const sortArrayByAttribute = (array:any[], attr:string = 'name', asc:boolean = true, compareFn:(a:any, b:any, attr:string) => number = compareArrayEntriesWAttr) => {
+export const sortArrayByAttribute = (
+  array: any[],
+  attr: string = "name",
+  asc: boolean = true,
+  compareFn: (a: any, b: any, attr: string) => number = compareArrayEntriesWAttr
+) => {
   const r = array.sort((a, b) => compareFn(a, b, attr));
 
   if (asc) {
@@ -160,7 +184,6 @@ export const sortArrayByAttribute = (array:any[], attr:string = 'name', asc:bool
   return r.reverse();
 };
 
-
 /**
  * checks if value is in array
  * @param array: array of interest
@@ -168,7 +191,11 @@ export const sortArrayByAttribute = (array:any[], attr:string = 'name', asc:bool
  * @param attr: attrribute where value is stored (default id)
  * @return boolean
  */
-export const isValueInArray = (array:any[], value:any, attr:string = 'id'):any => array.find(a => a[attr] === value);
+export const isValueInArray = (
+  array: any[],
+  value: any,
+  attr: string = "id"
+): any => array.find((a) => a[attr] === value);
 
 /**
  * find value in an array
@@ -176,7 +203,10 @@ export const isValueInArray = (array:any[], value:any, attr:string = 'id'):any =
  * @param value: value of interest
  * @return index
  */
-export const findArrayIndexOfValue = (array:any[], value:any):number | null => {
+export const findArrayIndexOfValue = (
+  array: any[],
+  value: any
+): number | null => {
   let r = null;
 
   array.map((a, i) => {
@@ -197,10 +227,14 @@ export const findArrayIndexOfValue = (array:any[], value:any):number | null => {
  * @param attr: attr where value is stored (default id)
  * @return index
  */
-export const findArrayIndexOfValueByAttr = (array:any[], value:any, attr:string = 'id'):number | null => {
+export const findArrayIndexOfValueByAttr = (
+  array: any[],
+  value: any,
+  attr: string = "id"
+): number | null => {
   let r = null;
 
-  array.map((a:any, i:number) => {
+  array.map((a: any, i: number) => {
     if (a[attr] === value) {
       r = i;
     }
@@ -211,13 +245,12 @@ export const findArrayIndexOfValueByAttr = (array:any[], value:any, attr:string 
   return r;
 };
 
-
 /**
  * @return last n elements of array
  * @param array
  * @param n: number of elements to be returned
  */
-export const getArrayLastNElements = (arr:any[], n:number):any[] => {
+export const getArrayLastNElements = (arr: any[], n: number): any[] => {
   const arraySize = arr.length;
 
   if (arraySize <= n) {
@@ -227,11 +260,41 @@ export const getArrayLastNElements = (arr:any[], n:number):any[] => {
   return arr.slice(arraySize - n, arraySize);
 };
 
-export const shuffle = (source:any[]):any[] => {
+export const shuffle = (source: any[]): any[] => {
   const arr = [...source];
   for (let i = arr.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [arr[i], arr[j]] = [arr[j], arr[i]];
   }
   return arr;
+};
+
+const arrayMoveMutate = <A = any>(
+  array: A[],
+  from: number,
+  to: number
+): void => {
+  const startIndex = to < 0 ? array.length + to : to;
+
+  if (startIndex >= 0 && startIndex < array.length) {
+    const item = array.splice(from, 1)[0];
+    array.splice(startIndex, 0, item);
+  }
+};
+
+/**
+ * Move an array item to a different position
+ * typescript version of https://www.npmjs.com/package/array-move
+ * @param array
+ * @param from
+ * @param to
+ */
+export const arrayMove = <A = any>(
+  array: A[],
+  from: number,
+  to: number
+): A[] => {
+  array = [...array];
+  arrayMoveMutate(array, from, to);
+  return array;
 };
