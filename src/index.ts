@@ -1,19 +1,21 @@
-import * as array from './array';
-import * as cast from './cast';
-import * as curl from './curl';
-import * as date from './date';
-import * as ds from './ds';
-import * as number from './number';
-import * as random from './random';
-import * as string from './string';
-import * as url from './url';
-import * as regex from './regex';
-import * as color from './color';
-import * as promise from './promise';
-import * as types from './types';
+import * as array from "./array";
+import * as buffer from "./buffer";
+import * as cast from "./cast";
+import * as curl from "./curl";
+import * as date from "./date";
+import * as ds from "./ds";
+import * as number from "./number";
+import * as random from "./random";
+import * as string from "./string";
+import * as url from "./url";
+import * as regex from "./regex";
+import * as color from "./color";
+import * as promise from "./promise";
+import * as types from "./types";
 
-const exportModules = {
+export default {
   array,
+  buffer,
   cast,
   curl,
   date,
@@ -29,6 +31,7 @@ const exportModules = {
 
 export {
   array,
+  buffer,
   cast,
   curl,
   date,
@@ -40,7 +43,5 @@ export {
   url,
   regex,
   color,
-  types
+  types,
 };
-
-export default exportModules;
