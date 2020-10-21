@@ -12,5 +12,8 @@ export const toRGBA = (hex: string, alpha: number = 1): string => {
   )},${parseInt(hex.substring(5, 7), 16)},${alpha})`;
 };
 
-// https://css-tricks.com/snippets/javascript/random-hex-color/
+/**
+ * generate a random color
+ * taken from https://css-tricks.com/snippets/javascript/random-hex-color/
+ */
 export const getRandomColor = (): string =>  '#' + Math.floor(Math.random() * 16777215).toString(16);
