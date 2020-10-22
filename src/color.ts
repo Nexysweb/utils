@@ -14,6 +14,15 @@ export const toRGBA = (hex: string, alpha: number = 1): string => {
 
 /**
  * generate a random color
- * taken from https://css-tricks.com/snippets/javascript/random-hex-color/
+ * taken from : https://stackoverflow.com/questions/1484506/random-color-generator
+ * old: taken from https://css-tricks.com/snippets/javascript/random-hex-color/
  */
-export const getRandomColor = (): string =>  '#' + Math.floor(Math.random() * 16777215).toString(16);
+
+export const getRandomColor = () => {
+  const letters = "0123456789ABCDEF";
+  let color = "#";
+  for (var i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+};
