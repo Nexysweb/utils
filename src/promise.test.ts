@@ -7,6 +7,7 @@ test("delay", async () => {
   const t0 = performance.now();
   await P.delay(ms);
   const t1 = performance.now();
+  const delta = t1 - t0
 
-  expect(ms).toBeLessThanOrEqual(t1 - t0 - 1); // remove "1" as a buffer, so that tests always pass
+  expect(delta).toBeGreaterThanOrEqual(ms - 1); // remove "1" as a buffer, so that tests always pass
 });
