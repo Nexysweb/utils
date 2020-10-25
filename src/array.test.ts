@@ -189,3 +189,18 @@ test('.mutate', t => {
 	expect(ArrayLib.arrayMoveMutate(fixture2, 3, 0)).toEqual
 	t.deepEqual(fixture2, [4, 1, 2, 3, 5]);
 });*/
+
+test("array filter null and undefined using predicate", () => {
+  const a: (string | undefined | null)[] = [
+    "a",
+    null,
+    "b",
+    undefined,
+    "c",
+    null,
+  ];
+  const b: string[] = ["a", "b", "c"];
+  const c: string[] = a.filter(ArrayLib.notEmpty);
+
+  expect(c).toEqual(b);
+});
