@@ -15,6 +15,7 @@ export const arrayBufferTo64 = (a: ArrayBuffer): string => {
  * @param type: content type
  * blob won't work with Node
  */
+/*
 export const base64ToBlob = (
   content: string,
   type: string = "application/pdf"
@@ -39,6 +40,7 @@ export const base64ToBlob = (
   // Return BLOB image after conversion
   return new Blob([uInt8Array], { type });
 };
+*/
 
 /**
  * A Blob() is almost a File() - it's just missing the two properties below which we will add
@@ -48,6 +50,7 @@ export const base64ToBlob = (
  * @param lastModified: timestamp
  * blob won't work with Node
  */
+/*
 export const blobToFile = (
   blob: Blob,
   name: string,
@@ -57,3 +60,4 @@ export const blobToFile = (
     lastModified,
     type: blob.type,
   });
+*/
