@@ -11,6 +11,7 @@ import * as url from "./url";
 import * as regex from "./regex";
 import * as color from "./color";
 import * as promise from "./promise";
+import * as typeguard from "./typeguard";
 import * as types from "./types";
 
 export default {
@@ -43,5 +44,6 @@ export {
   url,
   regex,
   color,
+  typeguard,
   types,
 };
