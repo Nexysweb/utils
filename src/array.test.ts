@@ -39,14 +39,18 @@ test("isObjectInArray", () => {
 });
 
 test("isObjectAttrInArray", () => {
-  const obj3 = { fruit: "pear", animal: "leopard" };
-  const a = [
+  interface A {
+    fruit: string;
+    animal: string;
+  }
+  const obj3: A = { fruit: "pear", animal: "leopard" };
+  const a: A[] = [
     { fruit: "apple", animal: "lion" },
     { fruit: "banana", animal: "elephant" },
     obj3,
   ];
 
-  const r = ArrayLib.isObjectAttrInArray("pear", a, "fruit");
+  const r = ArrayLib.isObjectAttrInArray<A>("pear", a, "fruit");
   const r2 = ArrayLib.isObjectAttrInArray("pear2", a, "fruit");
 
   const e = 2;
@@ -129,7 +133,7 @@ test("isValueInArray", () => {
   const array = [{ id: 3 }, { id: 5 }];
   const value = 5;
 
-  expect(ArrayLib.isValueInArray(array, value)).toEqual({ id: 5 });
+  expect(ArrayLib.isValueInArray(array, value, "id")).toEqual({ id: 5 });
 });
 
 test("findArrayIndexOfValue", () => {

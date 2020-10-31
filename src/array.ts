@@ -31,7 +31,7 @@ export const sumArrayBoolean = (arr: boolean[]): number =>
  * @param  arr: array of objects
  * @return index if exists otherwise null
  */
-export const isObjectInArray = (k: any, arr: Array<any>) => {
+export const isObjectInArray = <A>(k: A, arr: Array<A>): number | null => {
   var a = arr.indexOf(k);
 
   if (a === -1) {
@@ -48,10 +48,10 @@ export const isObjectInArray = (k: any, arr: Array<any>) => {
  * @param  attr: attribute of integer, default, "id"
  * @return index if exists otherwise null
  */
-export const isObjectAttrInArray = (
-  k: any,
-  arr: any[],
-  attr: string = "id"
+export const isObjectAttrInArray = <A, B = string>(
+  k: B,
+  arr: { [a in keyof A]: B }[],
+  attr: keyof A
 ): number | null => {
   let idx = null;
 
@@ -75,7 +75,7 @@ export const isObjectAttrInArray = (
  * @param  attr: attribute of integer, default, "id"
  * @return index if exists otherwise null
  */
-export const isNestedObjectAttrInArray = (
+export const isNestedObjectAttrInArray = <A>(
   k: any,
   arr: any[],
   nest: any,
@@ -110,7 +110,7 @@ export const createArrayOfLength = (n: number, idx: number = 1): number[] =>
  * @param arr: multy-dimensional array
  * @return flatten array
  */
-export const flattenArray = (arr: any[]): any[] => [].concat.apply([], arr);
+export const flattenArray = <A>(arr: (A | A[])[]): A[] => arr.flatMap((x) => x);
 
 // start comparison helper
 export const compareArrayEntriesDepth = (
@@ -141,13 +141,13 @@ export const compareArrayEntriesDepth = (
   return compareArrayEntries(ca, cb);
 };
 
-export const compareArrayEntriesWAttr = (
-  a: any,
-  b: any,
-  attr: string
+export const compareArrayEntriesWAttr = <A>(
+  a: A,
+  b: A,
+  attr: keyof A
 ): number => compareArrayEntries(a[attr], b[attr]);
 
-export const compareArrayEntries = (a: any, b: any): number => {
+export const compareArrayEntries = <A>(a: A, b: A): -1 | 0 | 1 => {
   if (a < b) {
     return -1;
   }
@@ -191,10 +191,10 @@ export const sortArrayByAttribute = (
  * @param attr: attrribute where value is stored (default id)
  * @return boolean
  */
-export const isValueInArray = (
-  array: any[],
-  value: any,
-  attr: string = "id"
+export const isValueInArray = <A>(
+  array: { [attrRest: string]: any }[],
+  value: A,
+  attr: string
 ): any => array.find((a) => a[attr] === value);
 
 /**
@@ -260,7 +260,7 @@ export const getArrayLastNElements = (arr: any[], n: number): any[] => {
   return arr.slice(arraySize - n, arraySize);
 };
 
-export const shuffle = (source: any[]): any[] => {
+export const shuffle = <A>(source: A[]): A[] => {
   const arr = [...source];
   for (let i = arr.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -300,6 +300,8 @@ export const arrayMove = <A = any>(
 };
 
 // https://stackoverflow.com/questions/43118692/typescript-filter-out-nulls-from-an-array
-export function notEmpty<TValue>(value: TValue | null | undefined): value is TValue {
-    return value !== null && value !== undefined;
+export function notEmpty<TValue>(
+  value: TValue | null | undefined
+): value is TValue {
+  return value !== null && value !== undefined;
 }

@@ -4,7 +4,7 @@ import { removeWhitespace } from "./string";
  * @see https://codeburst.io/javascript-array-distinct-5edc93501dc4
  * @return only distinct entries in an array
  */
-export const distinct = (arr: any[]): any[] => [...new Set(arr)];
+export const distinct = <A>(arr: A[]): A[] => [...new Set(arr)];
 
 /**
  * transposes an object in the mathematical terms; i.e. rows become columns and columns become rows.
