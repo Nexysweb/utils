@@ -206,3 +206,22 @@ describe("verify object nested optional", () => {
     expect(TG.verifyObject(e1 as any, s)).toEqual(false);
   });
 });
+
+describe("generic typeguard", () => {
+  interface MyTestInterface {
+    name: string;
+    age: number;
+  }
+
+  const struc: TG.StructureUnit<MyTestInterface>[] = [
+    { name: "name", type: "string", optional: false },
+    { name: "age", type: "number", optional: false },
+  ];
+
+  const isTestInterface = (a: any): a is MyTestInterface =>
+    TG.isObject<MyTestInterface>(a, struc);
+
+  const a: any = { name: "myname", age: 29 };
+
+  expect(isTestInterface(a)).toEqual(true);
+});

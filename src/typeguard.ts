@@ -50,3 +50,13 @@ export const verifyObject = <A>(
     })
     .reduce((a, b) => a && b);
 };
+
+/**
+ * generic typeguard
+ * @param objectToType generic type
+ * @param structure definition of Object describing <A>
+ */
+export const isObject = <A>(
+  objectToType: A,
+  structure: StructureUnit<A>[]
+): objectToType is A => verifyObject<A>(objectToType, structure);
