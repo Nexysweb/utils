@@ -1,12 +1,19 @@
 /**
+ * converts array buffer to string
+ * https://stackoverflow.com/questions/9267899/arraybuffer-to-base64-encoded-string
+ * @param a: array buffer
+ */
+export const arrayBufferToString = (buf: ArrayBuffer) => {
+  const b: Uint8Array = new Uint8Array(buf);
+  return b.reduce((data, byte) => data + String.fromCharCode(byte), '');
+};
+
+/**
  * converts array buffer to base 64
  * https://stackoverflow.com/questions/9267899/arraybuffer-to-base64-encoded-string
  * @param a: array buffer
  */
-export const arrayBufferTo64 = (a: ArrayBuffer): string => {
-  const b: Uint8Array = new Uint8Array(a);
-  return btoa(b.reduce((data, byte) => data + String.fromCharCode(byte), ""));
-};
+export const arrayBufferTo64 = (a: ArrayBuffer): string => btoa(arrayBufferToString(a));
 
 /**
  * converts base64 to blob
